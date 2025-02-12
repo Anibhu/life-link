@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 * {
     margin: 0;
     padding: 0;
@@ -280,3 +281,139 @@ section:nth-child(odd){
     font-size: 24px;
     cursor: pointer;
 }
+=======
+/* General styling for the page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 20px;
+    background-size: cover;
+    background-image: url(../../images/Blood-Donation-2.jpg);
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Styling for the donor list container */
+.blood {
+    background-color: rgba(165, 47, 47, 0.85);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 90%;
+    width: 100%;
+    margin: auto;
+    overflow: auto;
+}
+
+/* Styling for the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Styling for table headers */
+th {
+    background-color: #8b1c1c;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid #fff;
+}
+
+/* Styling for table rows */
+td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Alternating row colors */
+tbody tr:nth-child(even) {
+    background-color: rgba(242, 242, 242, 0.9);
+}
+
+tbody tr:hover {
+    background-color: rgba(248, 215, 218, 0.9);
+    transition: 0.3s;
+}
+
+/* Styling for search form */
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Modern search input */
+.search-input {
+    width: 100%;
+    max-width: 500px;
+    padding: 15px;
+    border: 4px solid #5a5a5a;
+    border-radius: 5px;
+    font-size: 16px;
+    background: #232323;
+    color: white;
+    text-align: left;
+    transition: all 0.3s ease-in-out;
+}
+
+.search-input::placeholder {
+    color: #ffffff;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #d90429;
+    box-shadow: 0 0 10px rgba(217, 4, 41, 0.5);
+}
+
+.search-input:hover {
+    background: #2e2e2e;
+    border-color: #ff0033;
+    cursor: text;
+}
+
+/* Modern search button */
+.search-button {
+    background: #1b090c;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.search-button:hover {
+    background: #9a0368;
+    box-shadow: 0 0 12px rgba(255, 255, 220, 0.249);
+    transform: scale(1.05);
+    color: #ffffff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .search-input {
+        width: 80%;
+    }
+}
+
+
+
+
+
+>>>>>>> uiux
