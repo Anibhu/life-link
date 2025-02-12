@@ -44,7 +44,7 @@ router.get('/blood/search', async (req, res) => {
                 OR "name" ILIKE ${placeholder} 
                 OR CAST("age" AS TEXT) ILIKE ${placeholder} 
                 OR "contact" ILIKE ${placeholder} 
-                OR CAST("PID" AS TEXT) ILIKE ${placeholder}
+                OR CAST("pid" AS TEXT) ILIKE ${placeholder}
             `);
             values.push(`%${term}%`);
         });
