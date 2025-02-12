@@ -7,6 +7,11 @@ router.get('/', (req,res) => {
     res.render("index.ejs");
 });
 
+router.get('/registration', (req,res) => {
+    res.render("pages/registration.ejs");
+});
+
+
 router.get('/blood', (req,res) => {
     res.render("blood.ejs");
 });

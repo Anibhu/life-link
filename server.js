@@ -26,7 +26,7 @@ const connectDB = async () => {
 
 connectDB();
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
@@ -34,3 +34,4 @@ app.use(express.static("public"));
 app.use('/', router);
 
 app.listen(PORT, ()=> console.log(`Server Running at port ${PORT}`));
+
