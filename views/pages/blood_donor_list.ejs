@@ -22,10 +22,10 @@
     <tbody>
         <% blood_donors.forEach(blood_donor => { %>
             <tr>
-                <td><%= blood_donor["Patient ID"] %></td>
-                <td><%= blood_donor["Donor Name"] %></td>
+                <td><%= blood_donor["pid"] %></td>
+                <td><%= blood_donor["name"] %></td>
                 <td><%= blood_donor["age"] %></td>
-                <td><%= blood_donor["Blood Group"] %></td>
+                <td><%= blood_donor["bloodgroup"] %></td>
                 <td><%= blood_donor["location"] %></td>
                 <td><%= blood_donor["contact"] %></td>
             </tr>
