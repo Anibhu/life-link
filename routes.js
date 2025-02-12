@@ -11,6 +11,10 @@ router.get('/registration', (req,res) => {
     res.render("pages/registration.ejs");
 });
 
+router.get('/login', (req,res) => {
+    res.render("pages/login.ejs");
+});
+
 
 router.get('/blood', (req,res) => {
     res.render("blood.ejs");

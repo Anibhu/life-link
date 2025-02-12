@@ -6,6 +6,17 @@
     font-family: Arial;
 }
 
+.bg-image {
+    background-image: url('/images/blood-donation-bg.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    z-index: -1; 
+    min-height: 100vh; 
+}
+
+
 header {
     position: fixed;
     top: 0;
