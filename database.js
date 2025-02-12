@@ -12,8 +12,8 @@ const pool = new Pool({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     ssl: {
-        rejectUnauthorized: false,  // ✅ Fix: Allows AWS RDS connection without a certificate
-    },
+        rejectUnauthorized: false,
+      }
 });
 
 export default pool;

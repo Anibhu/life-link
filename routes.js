@@ -44,12 +44,12 @@ router.get('/blood/search', async (req, res) => {
         searchTerms.forEach((term, index) => {
             const placeholder = `$${index + 1}`;
             conditions.push(`
-                "Blood Group" ILIKE ${placeholder} 
+                "bloodgroup" ILIKE ${placeholder} 
                 OR "location" ILIKE ${placeholder} 
-                OR "Donor Name" ILIKE ${placeholder} 
+                OR "name" ILIKE ${placeholder} 
                 OR CAST("age" AS TEXT) ILIKE ${placeholder} 
                 OR "contact" ILIKE ${placeholder} 
-                OR CAST("Patient ID" AS TEXT) ILIKE ${placeholder}
+                OR CAST("PID" AS TEXT) ILIKE ${placeholder}
             `);
             values.push(`%${term}%`);
         });
