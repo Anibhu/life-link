@@ -294,4 +294,8 @@ footer {
     .login-card, .info-box {
         width: 90%;
     }
+.registration-container button:hover {
+    background: white;
+    color: #ff7200;
+    border: 1px solid #ff7200;
 }
