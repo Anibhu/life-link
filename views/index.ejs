@@ -4,20 +4,20 @@
 <section id="home">
     <div class="home-container">
         <div class="home-left">
-            <h1>Welcome to Our Platform</h1>
+            <h1>Welcome to LifeLink</h1>
             <p>Join us to explore amazing opportunities. Be part of our community.</p>
             <a href="/registration" class="join-btn">Join Us</a>
         </div>
         <div class="home-right">
-            <form class="login-form">
-                <h2>Login Here</h2>
-                <input type="email" placeholder="Enter your Email" required>
-                <input type="password" placeholder="Enter Password" required>
-                <button type="submit">Login</button>
-                <p class="link">Don't have an account?<br>
-                    <a href="/registration" class="signup-btn">Sign Up</a></p>
+            <div class="login-card">
+                <form class="login-form" action="/login" method="POST">
+                    <h2>Login</h2>
+                    <input type="email" name="email" placeholder="Enter your Email" required>
+                    <input type="password" name="password" placeholder="Enter Password" required>
+                    <p id="error-message" style="color: red; display: none;">Invalid email or password.</p>
+                    <button type="submit">Login</button>
+                    <p class="link">Don't have an account? <a href="/registration" class="signup-btn">Sign Up</a></p>
                     <p class="liw">Log in with</p>
-
                     <div class="icons">
                         <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
                         <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
@@ -25,7 +25,8 @@
                         <a href="#"><ion-icon name="logo-google"></ion-icon></a>
                         <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
                     </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </section>
@@ -38,7 +39,7 @@
     </div>
 </section>
 
-<!-- Work Section -->
+<!-- Services Section -->
 <section id="services">
     <div class="section-content">
         <h2>Our Services</h2>
@@ -60,26 +61,30 @@
         let navLinks = document.querySelectorAll("header nav a");
 
         window.addEventListener("scroll", () => {
+            let scrollPos = window.scrollY;
+            
             sections.forEach((sec) => {
-                let top = window.scrollY;
                 let offset = sec.offsetTop - 150;
                 let height = sec.offsetHeight;
                 let id = sec.getAttribute("id");
 
-                if (top >= offset && top < offset + height) {
-                    navLinks.forEach((link) => {
-                        link.classList.remove("active");
-                    });
-
+                if (scrollPos >= offset && scrollPos < offset + height) {
+                    navLinks.forEach((link) => link.classList.remove("active"));
                     let activeLink = document.querySelector(`header nav a[href="#${id}"]`);
-                    if (activeLink) {
-                        activeLink.classList.add("active");
-                    }
+                    if (activeLink) activeLink.classList.add("active");
                 }
             });
         });
     });
 </script>
 
-<!-- Ionicons Script Added Here -->
+<!-- Ionicons Script -->
 <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const error = new URLSearchParams(window.location.search).get('error');
+        if (error === "invalid") {
+            document.getElementById("error-message").style.display = "block";
+        }
+    });
+</script>
