@@ -3,35 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register | LifeLink</title>
-    <link rel="stylesheet" href="/styles.css">
+    <title>Sign Up</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: peachpuff;
+        }
+        .form-container {
+            background: rgba(255, 165, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .input-group input, .input-group select {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .full-width {
+            width: 100%;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: orange;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .submit-btn:hover {
+            background-color: darkorange;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .login-link a {
+            color: blue;
+            text-decoration: none;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-
-    <div class="registration-container">
-        <h2>Register</h2>
-        <form action="/register" method="POST">
-            <input type="text" name="name" placeholder="Full Name" required>
-            <input type="number" name="age" placeholder="Age" required>
-            <input type="text" name="contact" placeholder="Contact Number" required>
-            <input type="text" name="address" placeholder="Address" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <select name="bloodgroup" required>
-                <option value="">Select Blood Group</option>
-                <option value="A+">A+</option>
-                <option value="A-">A-</option>
-                <option value="B+">B+</option>
-                <option value="B-">B-</option>
-                <option value="O+">O+</option>
-                <option value="O-">O-</option>
-                <option value="AB+">AB+</option>
-                <option value="AB-">AB-</option>
-            </select>
-            <button type="submit">Register</button>
+    <div class="form-container">
+        <h2>Sign Up</h2>
+        <form>
+            <div class="input-group">
+                <input type="text" placeholder="First Name" required>
+                <input type="text" placeholder="Last Name" required>
+            </div>
+            <div class="input-group">
+                <input type="number" placeholder="Age" required class="full-width">
+            </div>
+            <div class="input-group">
+                <input type="text" placeholder="Contact Number" required class="full-width">
+            </div>
+            <div class="input-group">
+                <select required>
+                    <option value="">Blood Group</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                </select>
+                <select required>
+                    <option value="">Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <input type="email" placeholder="Email" required class="full-width">
+            </div>
+            <div class="input-group">
+                <input type="password" placeholder="Password" required class="full-width">
+            </div>
+            <button type="submit" class="submit-btn">Register</button>
         </form>
-        <p>Already have an account? <a href="/">Login</a></p>
+        <div class="login-link">
+            Already have an account? <a href="/index">Login</a>
+        </div>
     </div>
-
 </body>
 </html>
