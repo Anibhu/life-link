@@ -8,18 +8,18 @@ router.get('/', (req,res) => {
 });
 
 router.get('/registration', (req, res) => {
-    res.render("pages/registration.ejs"); // If stored inside views/pages/
+    res.render("pages/registration.ejs");
 });
-
-router.get('/login', (req,res) => {
-    res.render("pages/login.ejs");
-});
-
 
 router.post('/register', async (req, res) => {
     const { name, age, contact, address, email, password, bloodgroup } = req.body;
 
     try {
+        const userExists = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+        if (userExists.rows.length > 0) {
+            return res.status(400).send("Email already in use");
+        }
+
         await pool.query(
             "INSERT INTO users (name, age, contact, address, email, password, bloodgroup) VALUES ($1, $2, $3, $4, $5, $6, $7)",
             [name, age, contact, address, email, password, bloodgroup]
@@ -27,10 +27,34 @@ router.post('/register', async (req, res) => {
 
         res.redirect('/');
     } catch (error) {
-        console.log(error);
+        console.error("Registration Error:", error);
         res.status(500).send("Server Error");
     }
 });
+
+router.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+
+        if (result.rows.length === 0) {
+            return res.status(401).send("Invalid credentials");
+        }
+
+        const user = result.rows[0];
+
+        if (password !== user.password) { // No hashing for now
+            return res.status(401).send("Invalid credentials");
+        }
+
+        res.redirect('/blood/all'); // Redirect to a dashboard or home page
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Server Error");
+    }
+});
+
 
 router.get('/blood', (req,res) => {
     res.render("blood.ejs");
@@ -55,7 +79,7 @@ router.get('/blood/search', async (req, res) => {
             return res.render('pages/blood_donor_list', { blood_donors: [] });
         }
 
-        const searchTerms = query.split(',').map(term => term.trim()); // Split by comma & trim spaces
+        const searchTerms = query.split(',').map(term => term.trim());
 
         let sql = `SELECT * FROM donors WHERE `;
         let conditions = [];
