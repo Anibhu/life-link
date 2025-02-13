@@ -3,40 +3,57 @@
 <link rel="stylesheet" href="/css/styles.css">
 
 <section id="home">
-    <div class="content">
-        <h1>Wanna know<br><span>About</span> <br>BlackBoard</h1>
-        <p class="par">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt neque 
-             expedita atque eveniet <br> quis nesciunt. Quos nulla vero consequuntur, fugit nemo ad delectus 
-            <br> a quae totam ipsa illum minus laudantium?</p>
+    <div class="home-container">
+        <div class="home-left">
+            <h1>Welcome to Our Platform</h1>
+            <p>Join us to explore amazing opportunities. Be part of our community.</p>
+            <a href="/registration" class="join-btn">Join Us</a>
+        </div>
+        <div class="home-right">
+            <form class="login-form">
+                <h2>Login Here</h2>
+                <input type="email" placeholder="Enter your Email" required>
+                <input type="password" placeholder="Enter Password" required>
+                <button type="submit">Login</button>
+                <p class="link">Don't have an account?<br>
+                    <a href="/registration" class="signup-btn">Sign Up</a></p>
+                    <p class="liw">Log in with</p>
 
-            <button class="cn"><a href="/registration">JOIN US</a></button>
-
-
-        <div class="form">
-            <h2>Login Here</h2>
-            <input type="text" id="Number" placeholder="Enter your Email or Number">
-            <input type="password" id="password" placeholder="Enter Password Here">
-            <button onclick="validateID()" class="btnn"><a href="#">Login</a></button>
-
-            <p class="link">Don't have an account?<br>
-                <a href="#">Sign up</a> here</p>
-            <p class="liw">Log in with</p>
-
-            <div class="icons">
-                <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
-                <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
-                <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
-                <a href="#"><ion-icon name="logo-google"></ion-icon></a>
-                <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
-            </div>
+                    <div class="icons">
+                        <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
+                    </div>
+            </form>
         </div>
     </div>
 </section>
 
-<section id="about">About</section>
-<section id="services">Services</section>
-<section id="portfolio">Portfolio</section>
-<section id="contact">Contact</section>
+<!-- About Section -->
+<section id="about">
+    <div class="section-content">
+        <h2>About Us</h2>
+        <p>We are dedicated to making a difference. Learn more about our mission.</p>
+    </div>
+</section>
+
+<!-- Work Section -->
+<section id="services">
+    <div class="section-content">
+        <h2>Our Services</h2>
+        <p>Discover the projects and initiatives we are working on.</p>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+    <div class="section-content">
+        <h2>Contact Us</h2>
+        <p>Get in touch with us for any queries or support.</p>
+    </div>
+</section>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {

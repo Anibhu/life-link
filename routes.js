@@ -7,10 +7,26 @@ router.get('/', (req,res) => {
     res.render("index.ejs");
 });
 
-router.get('/registration', (req,res) => {
-    res.render("pages/registration.ejs");
+router.get('/registration', (req, res) => {
+    res.render("pages/registration.ejs"); // If stored inside views/pages/
 });
 
+
+router.post('/register', async (req, res) => {
+    const { name, age, contact, address, email, password, bloodgroup } = req.body;
+
+    try {
+        await pool.query(
+            "INSERT INTO users (name, age, contact, address, email, password, bloodgroup) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+            [name, age, contact, address, email, password, bloodgroup]
+        );
+
+        res.redirect('/');
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Server Error");
+    }
+});
 
 router.get('/blood', (req,res) => {
     res.render("blood.ejs");
