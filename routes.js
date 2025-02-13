@@ -36,24 +36,24 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+        const user = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
 
-        if (result.rows.length === 0) {
-            return res.status(401).send("Invalid credentials");
+        if (user.rows.length === 0) {
+            return res.redirect('/?error=invalid'); // Redirect with error flag
         }
 
-        const user = result.rows[0];
-
-        if (password !== user.password) { // No hashing for now
-            return res.status(401).send("Invalid credentials");
+        if (user.rows[0].password !== password) {
+            return res.redirect('/?error=invalid'); // Redirect with error flag
         }
 
-        res.redirect('/blood/all'); // Redirect to a dashboard or home page
-    } catch (error) {
-        console.error(error);
+        // Successful login - Redirect to dashboard
+        res.redirect('/blood/all');
+    } catch (err) {
+        console.error(err.message);
         res.status(500).send("Server Error");
     }
 });
+
 
 
 router.get('/blood', (req,res) => {
@@ -119,6 +119,10 @@ router.get('/organs', (req,res) => {
 
 router.get('/tissue', (req,res) => {
     res.send("Welcome to the tissue page");
+});
+
+router.get('*', (req,res) => {
+    res.render('pages/page_not_found');
 });
 
 export default router;
