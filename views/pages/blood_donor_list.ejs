@@ -1,37 +1,38 @@
-<%- include ('../partials/header') -%>
-
-<h1>Donor List</h1>
-
-<%- include ('../partials/search') %>
-
+<!-- <%- include ('../partials/header') -%> -->
+<link rel="stylesheet" href="/css/styles.css">
+<div class = "blood">
+    <h1>Donor List</h1>
+    <%- include ('../partials/search') %>
+    
 <% if (blood_donors.length > 0) %>
+    <table>
 
-<table>
-
-    <thead>
-        <tr>
-            <th>PID</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Blood Group</th>
-            <th>Location</th>
-            <th>Contact</th>
-        </tr>
-    </thead>
+        <thead>
+            <tr>
+                <th>PID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Blood Group</th>
+                <th>Location</th>
+                <th>Contact</th>
+            </tr>
+        </thead>
 
     <tbody>
         <% blood_donors.forEach(blood_donor => { %>
             <tr>
-                <td><%= blood_donor["Patient ID"] %></td>
-                <td><%= blood_donor["Donor Name"] %></td>
+                <td><%= blood_donor["pid"] %></td>
+                <td><%= blood_donor["name"] %></td>
                 <td><%= blood_donor["age"] %></td>
-                <td><%= blood_donor["Blood Group"] %></td>
+                <td><%= blood_donor["bloodgroup"] %></td>
                 <td><%= blood_donor["location"] %></td>
                 <td><%= blood_donor["contact"] %></td>
             </tr>
         <% }) %>
     </tbody>
 
-</table>
+    </table>
+    
+</div>
 
 <%- include ('../partials/footer') -%>

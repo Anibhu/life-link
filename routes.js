@@ -11,6 +11,10 @@ router.get('/registration', (req, res) => {
     res.render("pages/registration.ejs"); // If stored inside views/pages/
 });
 
+router.get('/login', (req,res) => {
+    res.render("pages/login.ejs");
+});
+
 
 router.post('/register', async (req, res) => {
     const { name, age, contact, address, email, password, bloodgroup } = req.body;
@@ -63,10 +67,11 @@ router.get('/blood/search', async (req, res) => {
                 "bloodgroup" ILIKE ${placeholder} 
                 OR "location" ILIKE ${placeholder} 
                 OR "name" ILIKE ${placeholder} 
-                OR CAST("age" AS TEXT) ILIKE ${placeholder} 
+                OR "age"::TEXT ILIKE ${placeholder} 
                 OR "contact" ILIKE ${placeholder} 
-                OR CAST("PID" AS TEXT) ILIKE ${placeholder}
+                OR "pid"::TEXT ILIKE ${placeholder}
             `);
+            
             values.push(`%${term}%`);
         });
 
