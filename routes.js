@@ -11,7 +11,7 @@ router.get('/registration', (req, res) => {
     res.render("pages/registration.ejs");
 });
 
-router.post('/register', async (req, res) => {
+router.post('registration', async (req, res) => {
     const { name, age, contact, address, email, password, bloodgroup } = req.body;
 
     try {
