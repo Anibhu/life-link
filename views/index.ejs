@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%- include ('partials/header') -%>
 <link rel="stylesheet" href="/css/styles.css">
 
@@ -30,6 +31,980 @@
         </div>
     </div>
 </section>
+=======
+<!-- <%- include ('partials/header') -%> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood & Organ Donation</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">  </head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="/life-link/public/images/hospital.png" alt="Logo">
+            <h1>LIFE-LINK</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#hospitals">Hospitals</a></li>  <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <br>
+        <br>
+        <div class="auth-buttons">
+            <button class="btn-login-btn" onclick="window.location.href='login.ejs'">Login</button>
+            <button class="btn-signup-btn" onclick="window.location.href='signup.ejs'">Sign Up</button>
+        </div>
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Save Lives, Donate Today</h1>
+            <div class="banner">
+                <h2>Give the Gift of Life – Donate Blood & Organs</h2>
+            </div>
+            <div class="cta-buttons">
+                <button class="btn-register-btn">Register as a Donor</button>
+                <button class="btn-request-btn">Request for Blood/Organ</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <h2>About Us</h2>
+        <div class="about-content">
+            <img src="life-link/public/images/Blood-Donation-2.jpg" alt="Blood Donation">
+            <p>
+                We are a non-profit organization dedicated to connecting donors with patients in need. 
+                Our platform ensures a seamless process for blood and organ donation, saving lives every day.
+            </p>
+        </div>
+    </section>
+
+    <section id="hospitals" class="hospitals">  <h2>Our Partner Hospitals</h2>
+        <div class="hospital-list">
+            <div class="hospital-card">
+                <img src="hospital1.jpg" alt="Hospital 1">
+                <h3>BRAZZERS UNIVERSITY & HOSPITAL</h3>
+                <p>Address: 123 Main Street, Anytown</p>
+            </div>
+            <div class="hospital-card">
+                <img src="hospital2.jpg" alt="Hospital 2">
+                <h3>LUND UNIVERSITY & HOSPITAL</h3>
+                <p>Address: 456 Oak Avenue, Anytown</p>
+            </div>
+            </div>
+    </section>
+
+    <section id="dashboard" class="dashboard">
+        <h2>Hospital Dashboard</h2>
+        <div class="dashboard-content">
+            <div class="card">
+                <h3>List Available Organs</h3>
+                <p>Hospitals can update the system with available organs.</p>
+            </div>
+            <div class="card">
+                <h3>Manage Requests</h3>
+                <p>View patient requests and approve/reject them.</p>
+            </div>
+            <div class="card">
+                <h3>Emergency Alerts</h3>
+                <p>Notify urgent cases directly.</p>
+            </div>
+            <div class="card">
+                <h3>Donation Records</h3>
+                <p>Track previous donations and recipient details.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <p>&copy; 2023 Donate Life. All rights reserved.</p>
+    </footer>
+
+    <script src="index.js"></script>
+
+    <html lang="en">
+<head>
+    <script>
+        function handleAuth(isLogin) {
+            // Check if the user is registered (you'll need a way to do this)
+            const isRegistered = checkIfUserIsRegistered(); // Replace with your logic
+
+            if (isLogin) {
+                if (isRegistered) {
+                    window.location.href = 'login.html'; // Go to login if registered
+                } else {
+                    alert("You are not registered. Please sign up."); // Or redirect
+                    window.location.href = 'signup.html'; // Go to signup if not
+                }
+            } else { // Signup
+                if (isRegistered) {
+                    alert("You are already registered. Please login."); // Or redirect
+                    window.location.href = 'login.html'; // Go to login if already registered
+                } else {
+                    window.location.href = 'signup.html'; // Go to signup if not registered
+                }
+            }
+        }
+
+        function checkIfUserIsRegistered() {
+            // ***IMPORTANT***: This is where you need to implement your actual
+            // registration checking logic.  This could involve:
+            // 1. Checking a local storage value.
+            // 2. Making an AJAX request to your server to see if a user exists.
+            // 3. Any other method your app uses to manage user registration.
+
+            // Placeholder (replace this with your actual logic):
+            const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+            const userExists = registeredUsers.length > 0; // Example: Check if any users exist
+
+            return userExists; // Replace with your actual return value
+        }
+    </script>
+</head>
+</html>
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+<!--   contuct  us -->
+
+<section id="contact" class="contact">
+    <div class="contact-content">
+        <h2>Contact Us</h2>
+        <p>Have questions or want to get involved?  We'd love to hear from you!</p>
+
+        <div class="contact-form">
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Send Message</button>
+            </form>
+            <div id="form-response"></div>  </div>
+
+        <div class="contact-info">
+            <h3>Our Contact Details</h3>
+            <ul class="contact-list">
+                <li><i class="fas fa-map-marker-alt"></i> JGEC, PC ROY HALL</li>
+                <li><i class="fas fa-phone"></i> CONTACT JYOTI DA</li>
+                <li><i class="fas fa-envelope"></i> Surajitda@onlyfans.com</li>
+            </ul>
+            <div class="social-links">
+                <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Contact Section Styles */
+    .contact {
+        padding: 4rem;
+        background-color: #f8f9fa; /* Light gray background */
+        text-align: center; /* Center the content */
+    }
+
+    .contact-content {
+        max-width: 900px;
+        margin: 0 auto; /* Center the content horizontally */
+    }
+
+    .contact h2 {
+        margin-bottom: 2rem;
+        color: #e74c3c; /* Consistent heading color */
+    }
+
+    .contact-content p {
+        margin-bottom: 2rem;
+        color: #666; /* Slightly darker text color */
+    }
+
+    .contact-form, .contact-info {
+        display: inline-block; /* Arrange side by side */
+        vertical-align: top; /* Align to top */
+        width: 48%; /* Adjust width as needed */
+        padding: 20px;
+        box-sizing: border-box; /* Include padding in width */
+    }
+    @media (max-width: 768px) {
+        .contact-form, .contact-info {
+            width: 100%; /* Stack on smaller screens */
+            display: block;
+            margin-bottom: 20px;
+        }
+    }
+
+    .contact-form {
+        background-color: #fff; /* White background for form */
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #333; /* Darker label color */
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: calc(100% - 12px); /* Full width with padding adjustment */
+        padding: 0.8rem;
+        border: 1px solid #ced4da; /* Light gray border */
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .btn-submit {
+        background-color: #e74c3c;
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-submit:hover {
+        background-color: #c0392b;
+    }
+
+    .contact-info {
+        text-align: left; /* Align contact info to the left */
+    }
+
+    .contact-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .contact-list li {
+        margin-bottom: 1rem;
+        color: #555; /* Slightly lighter text color */
+    }
+
+    .contact-list li i {
+        margin-right: 0.8rem;
+        color: #e74c3c; /* Consistent icon color */
+    }
+    
+    section{
+        min-height: 100vh;
+    }
+
+    .social-links {
+        margin-top: 1.5rem;
+    }
+
+    .social-links a {
+        display: inline-block;
+        margin: 0 0.5rem;
+        color: #333; /* Darker social icon color */
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+        color: #e74c3c; /* Consistent hover color */
+    }
+</style>
+
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const formResponse = document.getElementById('form-response');
+        formResponse.innerHTML = "Thank you for your message. We will get back to you soon!"; // Display a thank you message
+
+        // You would typically use AJAX here to send the form data to your server.
+        // This is a simplified example.
+        const formData = new FormData(event.target);
+        // ... (Code to send formData to your server using fetch or XMLHttpRequest) ...
+    });
+</script>
+
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        
+    }
+    /*  HOSPITAL  */
+       
+    /* ... (Existing CSS) ... */
+
+/* Hospitals Section */
+.hospitals {
+    padding: 2rem;
+    text-align: center;
+}
+
+.hospital-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.hospital-card {
+    width: 300px;
+    border-radius: 10px;
+    overflow: hidden; /* Hide overflowing image content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff; /* White background for card */
+    transition: transform 0.2s; /* Smooth hover effect */
+}
+
+.hospital-card:hover {
+    transform: translateY(-5px); /* Move card slightly up on hover */
+}
+
+.hospital-card img {
+    width: 100%;
+    height: 200px; /* Fixed height for images */
+    object-fit: cover; /* Maintain aspect ratio and cover container */
+}
+
+.hospital-card h3 {
+    padding: 10px;
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333; /* Darker heading color */
+}
+
+.hospital-card p {
+    padding: 0 10px 10px;
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666; /* Lighter text color */
+}
+
+
+/* ... (Rest of your CSS) ... */
+
+/* Style adjustments for better readability */
+body {
+    font-family: 'Roboto', sans-serif; /* Modern font */
+    line-height: 1.6; /* Improved line height */
+    color: #333; /* Darker default text color */
+}
+
+h2 {
+    color: #e74c3c; /* Consistent heading color */
+}
+
+/* ... other CSS styles ... */
+
+
+    .btn-register-btn{
+    width: 220px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.btn-register-btn:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.btn-register-btn:active {
+    color: #000
+}
+
+.btn-register-btn:active:after {
+    background: transparent;
+}
+
+.btn-register-btn:hover:before {
+    opacity: 1;
+}
+
+.btn-register-btn:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+    .btn-signup-btn{
+    width: 220px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.btn-signup-btn:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.btn-signup-btn:active {
+    color: #000
+}
+
+.btn-signup-btn:active:after {
+    background: transparent;
+}
+
+.btn-signup-btn:hover:before {
+    opacity: 1;
+}
+
+.btn-signup-btn:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+    .btn-login-btn{
+    width: 220px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.btn-login-btn:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.btn-login-btn:active {
+    color: #000
+}
+
+.btn-login-btn:active:after {
+    background: transparent;
+}
+
+.btn-login-btn:hover:before {
+    opacity: 1;
+}
+
+.btn-login-btn:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+    .btn-request-btn{
+    width: 220px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.btn-request-btn:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.btn-request-btn:active {
+    color: #000
+}
+
+.btn-request-btn:active:after {
+    background: transparent;
+}
+
+.btn-request-btn:hover:before {
+    opacity: 1;
+}
+
+.btn-request-btn:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+    .btn {
+    padding: 15px 50px;
+    border: none;
+    outline: none;
+    color: #FFF;
+    cursor: pointer;
+    position: relative;
+    border-radius: 12px;
+    background-color: #ff1a1a; /* Default background color */
+    overflow: hidden;
+    z-index: 1; /* Ensure the button is above the pseudo-elements */
+}
+
+/* Background layer */
+.btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #333; /* Background color for the button */
+    z-index: -1;
+    border-radius: 10px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Glowing effect */
+.btn::before {
+    content: "";
+    background: linear-gradient(
+        45deg,
+        #FF0000, #FF7300, #FFFB00, #48FF00, #00FFD5, #002BFF, #FF00C8, #FF0000
+    );
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 600%;
+    z-index: -2; /* Place it behind the button */
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    filter: blur(8px);
+    animation: glowing 10s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+    opacity: 0; /* Hidden by default */
+}
+
+/* Keyframes for glow animation */
+@keyframes glowing {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Show glow effect on hover */
+.btn:hover::before {
+    opacity: 1;
+}
+
+/* Show glow effect on click */
+.btn:active::before {
+    opacity: 1;
+}
+
+/* Background change on click */
+.btn:active::after {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Change text color on active */
+.btn:active {
+    color: #000;
+    font-weight: bold;
+}
+
+
+    /* Navbar */
+
+    .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #ff4d4d;
+    color: white;
+    z-index: 1000;
+}
+
+.auth-buttons .btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: opacity 0.5s ease; /* Smooth fading effect */
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none; /* Prevents clicks when hidden */
+}
+
+.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+    .logo {
+        display: flex;
+        align-items: center;
+    }
+
+    .logo img {
+        height: 40px;
+        margin-right: 10px;
+    }
+
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .auth-buttons .btn {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .login-btn {
+        background-color: white;
+        color: #ff4d4d;
+    }
+
+    .signup-btn {
+        background-color: #ff1a1a;
+        color: white;
+    }
+
+    .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+    }
+
+    .menu-toggle .bar {
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        margin: 4px 0;
+    }
+
+    /* Hero Section */
+    .hero {
+        background: url('assets/images/Organ-Donation-1024x576.jpg') no-repeat center center/cover;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .hero-content p {
+        font-size: 1.2rem;
+        margin: 20px 0;
+    }
+
+    .donate-btn {
+        background-color: #ff1a1a;
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* About Section */
+    .about {
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .about-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .about-content img {
+        width: 300px;
+        border-radius: 10px;
+    }
+
+    /* Dashboard Section */
+    .dashboard {
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .dashboard-content {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    /* Banner Styling */
+    .banner {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        text-align: center;
+    }
+
+    .banner h2 {
+        font-size: 2rem;
+        color: #e74c3c;
+        margin: 0;
+    }
+
+    /* CTA Buttons Styling */
+    .cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .cta-buttons .btn {
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .cta-buttons .register-btn {
+        background-color: #e74c3c;
+        color: white;
+    }
+
+    .cta-buttons .request-btn {
+        background-color: #3498db;
+        color: white;
+    }
+
+    .cta-buttons .btn:hover {
+        opacity: 0.9;
+    }
+
+    .card {
+        background-color: #f9f9f9;
+        padding: 1rem;
+        border-radius: 10px;
+        width: 200px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Footer */
+    footer {
+        background-color: #ff4d4d;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .nav-links.active {
+            display: flex;
+        }
+
+        .menu-toggle {
+            display: flex;
+        }
+
+        .about-content {
+            flex-direction: column;
+        }
+    }
+</style>
+<script>
+//     let lastScrollY = window.scrollY;
+// const button = document.querySelector('.auth-buttons');
+
+// window.addEventListener('scroll', () => {
+//     if (window.scrollY > lastScrollY) {
+//         // Scrolling down -> hide button
+//         button.classList.add('hidden');
+//     } else {
+//         // Scrolling up -> show button
+//         button.classList.remove('hidden');
+//     }
+//     lastScrollY = window.scrollY;
+// });
+
+</script>
+<!-- NAVBAR JAVAscript -->
+
+>>>>>>> origin/uiux
 
 <!-- About Section -->
 <section id="about">
