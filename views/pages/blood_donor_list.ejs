@@ -1,17 +1,10 @@
 <!-- <%- include ('../partials/header') -%> -->
-
-<h1>Donor List</h1>
-
-<%- include ('../partials/search') %>
-
-<% if (blood_donors.length > 0) %>
 <link rel="stylesheet" href="/css/styles.css">
-<div class = "gallery">
-
-    <img src="../../images/Blood-Donation-2.jpg" alt = "Blood Donation">
-    
-</div>
 <div class = "blood">
+    <h1>Donor List</h1>
+    <%- include ('../partials/search') %>
+    
+<% if (blood_donors.length > 0) %>
     <table>
 
         <thead>
