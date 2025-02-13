@@ -1,7 +1,27 @@
 <%- include('partials/header') -%>
 
 <link rel="stylesheet" href="/css/styles.css">
+<form id="signupForm">
+    <button type="submit">Sign Up</button>
+</form>
 
+<script>
+    document.getElementById('signupForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form from actually submitting
+
+        // Get form data (replace with your actual form handling)
+        const username = document.getElementById('username').value;
+        // ... get other form data ...
+
+        // Store user data in local storage (basic example - improve this)
+        let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+        registeredUsers.push({ username: username }); // Add user
+        localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+
+        alert("Signup successful!");
+        window.location.href = 'index.html'; // Redirect to your main page
+    });
+</script>
 <div class="container">
     <h2>Blood & Organ Donation Registration</h2>
 

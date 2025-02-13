@@ -1,4 +1,53 @@
 <%- include ('../partials/header') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        function handleAuth(isLogin) {
+            // Check if the user is registered (you'll need a way to do this)
+            const isRegistered = checkIfUserIsRegistered(); // Replace with your logic
 
+            if (isLogin) {
+                if (isRegistered) {
+                    window.location.href = 'login.html'; // Go to login if registered
+                } else {
+                    alert("You are not registered. Please sign up."); // Or redirect
+                    window.location.href = 'signup.html'; // Go to signup if not
+                }
+            } else { // Signup
+                if (isRegistered) {
+                    alert("You are already registered. Please login."); // Or redirect
+                    window.location.href = 'login.html'; // Go to login if already registered
+                } else {
+                    window.location.href = 'signup.html'; // Go to signup if not registered
+                }
+            }
+        }
+
+        function checkIfUserIsRegistered() {
+            // ***IMPORTANT***: This is where you need to implement your actual
+            // registration checking logic.  This could involve:
+            // 1. Checking a local storage value.
+            // 2. Making an AJAX request to your server to see if a user exists.
+            // 3. Any other method your app uses to manage user registration.
+
+            // Placeholder (replace this with your actual logic):
+            const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+            const userExists = registeredUsers.length > 0; // Example: Check if any users exist
+
+            return userExists; // Replace with your actual return value
+        }
+    </script>
+</head>
+<body>
+    <div class="auth-buttons">
+            <button class="btn-login-btn" onclick="handleAuth(true)">Login</button>
+            <button class="btn-signup-btn" onclick="handleAuth(false)">Sign Up</button>
+        </div>
+    <script>
+        // ... (your other scripts) ...
+    </script>
+</body>
+</html>
 
 <%- include ('../partials/footer') %>
