@@ -1,6 +1,85 @@
 <%- include ('partials/header') -%>
+<link rel="stylesheet" href="/css/styles.css">
 
-<%- include ('partials/footer') -%>
+<section id="home">
+    <div class="home-container">
+        <div class="home-left">
+            <h1>Welcome to Our Platform</h1>
+            <p>Join us to explore amazing opportunities. Be part of our community.</p>
+            <a href="/registration" class="join-btn">Join Us</a>
+        </div>
+        <div class="home-right">
+            <form class="login-form">
+                <h2>Login Here</h2>
+                <input type="email" placeholder="Enter your Email" required>
+                <input type="password" placeholder="Enter Password" required>
+                <button type="submit">Login</button>
+                <p class="link">Don't have an account?<br>
+                    <a href="/registration" class="signup-btn">Sign Up</a></p>
+                    <p class="liw">Log in with</p>
+
+                    <div class="icons">
+                        <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
+                    </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about">
+    <div class="section-content">
+        <h2>About Us</h2>
+        <p>We are dedicated to making a difference. Learn more about our mission.</p>
+    </div>
+</section>
+
+<!-- Work Section -->
+<section id="services">
+    <div class="section-content">
+        <h2>Our Services</h2>
+        <p>Discover the projects and initiatives we are working on.</p>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+    <div class="section-content">
+        <h2>Contact Us</h2>
+        <p>Get in touch with us for any queries or support.</p>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let sections = document.querySelectorAll("section");
+        let navLinks = document.querySelectorAll("header nav a");
+
+        window.addEventListener("scroll", () => {
+            sections.forEach((sec) => {
+                let top = window.scrollY;
+                let offset = sec.offsetTop - 150;
+                let height = sec.offsetHeight;
+                let id = sec.getAttribute("id");
+
+                if (top >= offset && top < offset + height) {
+                    navLinks.forEach((link) => {
+                        link.classList.remove("active");
+                    });
+
+                    let activeLink = document.querySelector(`header nav a[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add("active");
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 <!-- Ionicons Script Added Here -->
 <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
