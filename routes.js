@@ -114,7 +114,7 @@ router.get('/blood/search', async (req, res) => {
 
 
 router.get('/organs', (req,res) => {
-    res.send("Welcome to the organs page");
+    res.render("pages/organ");
 });
 
 router.get('/tissue', (req,res) => {

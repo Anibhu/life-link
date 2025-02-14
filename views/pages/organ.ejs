@@ -1,0 +1,47 @@
+<%- include ('../partials/header') -%>
+
+<!-- Link Stylesheet -->
+<link rel="stylesheet" href="/css/styles.css">
+
+<div class="organ">
+    <h1 class="page-heading">Organ Donation Availability</h1>
+    
+    <!-- Include Search Bar -->
+    <%- include ('../partials/search') %>
+
+    <% if (organ_donors.length > 0) { %>
+    <table>
+        <thead>
+            <tr>
+                <th>Serial No.</th>
+                <th>Body Organ Part</th>
+                <th>Hospital Name</th>
+                <th>Request</th>
+                <th>Contact No.</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% organ_donors.forEach((donor, index) => { %>
+                <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= donor["organ_part"] %></td>
+                    <td><%= donor["hospital_name"] %></td>
+                    <td><%= donor["request"] %></td>
+                    <td><%= donor["contact_no"] %></td>
+                    <td><%= donor["location"] %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <% } else { %>
+        <p class="no-data">No organ donors available at the moment.</p>
+    <% } %>
+
+</div>
+
+<!-- Include Footer -->
+<%- include ('../partials/footer') -%>
+
+</div>

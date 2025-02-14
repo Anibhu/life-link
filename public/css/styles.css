@@ -6,7 +6,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center;/* */
     background-image: url('/images/blood_donation.jpg');
     background-size: cover;
     background-position: center;
@@ -24,8 +24,9 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.3); /* Reduced opacity to make the background more visible */
     z-index: 0;
+<<<<<<< HEAD
     box-sizing: border-box;
     scroll-behavior: smooth;
     font-family: Arial, sans-serif;
@@ -92,6 +93,10 @@ section {
 }
 
 #home {
+=======
+}
+.search-form {
+>>>>>>> origin/uiux
     display: flex;
     justify-content: center;
     align-items: center;
@@ -209,6 +214,84 @@ section {
     background: rgba(255, 72, 72, 1);
 }
 
+.blood {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 90%;
+    width: 100%;
+    margin: auto;
+    overflow: auto;
+    position: relative;
+    color: white;
+    background: rgba(0, 0, 0, 0.5); /* Slightly reduced black overlay */
+    min-height: 100vh;
+    z-index: 1;
+    text-align: center; /* Centers text inside the container */
+}
+
+/* Centering the table */
+table {
+    width: 80%;
+    margin: auto;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.3); /* More contrast for visibility */
+    border-radius: 8px;
+    overflow: hidden;
+    backdrop-filter: blur(2px);
+}
+
+/* Adding vibrant colors to table headers */
+th {
+    background-color: rgba(200, 20, 20, 0.9);
+    color: white;
+    padding: 14px;
+    text-align: center;
+    font-size: 18px;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.7);
+}
+
+/* Improve table row color contrast */
+td {
+    padding: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* Alternating row colors for better visibility */
+tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    transition: 0.3s;
+}
+
+/* Enhancing button colors */
+.search-button {
+    background: linear-gradient(45deg, #ff0000, #ff6a00);
+    color: white;
+    border: none;
+    padding: 14px 22px;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.search-button:hover {
+    background: linear-gradient(45deg, #ff6a00, #ff0000);
+    box-shadow: 0 0 15px rgba(255, 255, 220, 0.5);
+    transform: scale(1.08);
+    color: #ffffff;
+}
+
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -299,4 +382,10 @@ footer {
     color: #ff7200;
     border: 1px solid #ff7200;
 }
+<<<<<<< HEAD
 }
+=======
+/*
+
+*/
+>>>>>>> origin/uiux
