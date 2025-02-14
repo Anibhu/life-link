@@ -1,53 +1,92 @@
-<%- include ('../partials/header') %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>
-        function handleAuth(isLogin) {
-            // Check if the user is registered (you'll need a way to do this)
-            const isRegistered = checkIfUserIsRegistered(); // Replace with your logic
-
-            if (isLogin) {
-                if (isRegistered) {
-                    window.location.href = 'login.html'; // Go to login if registered
-                } else {
-                    alert("You are not registered. Please sign up."); // Or redirect
-                    window.location.href = 'signup.html'; // Go to signup if not
-                }
-            } else { // Signup
-                if (isRegistered) {
-                    alert("You are already registered. Please login."); // Or redirect
-                    window.location.href = 'login.html'; // Go to login if already registered
-                } else {
-                    window.location.href = 'signup.html'; // Go to signup if not registered
-                }
-            }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
-
-        function checkIfUserIsRegistered() {
-            // ***IMPORTANT***: This is where you need to implement your actual
-            // registration checking logic.  This could involve:
-            // 1. Checking a local storage value.
-            // 2. Making an AJAX request to your server to see if a user exists.
-            // 3. Any other method your app uses to manage user registration.
-
-            // Placeholder (replace this with your actual logic):
-            const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
-            const userExists = registeredUsers.length > 0; // Example: Check if any users exist
-
-            return userExists; // Replace with your actual return value
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: peachpuff;
         }
-    </script>
+        .form-container {
+            background: rgba(255, 165, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .input-group input, .input-group select, .input-group textarea {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .full-width {
+            width: 100%;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: orange;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .submit-btn:hover {
+            background-color: darkorange;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .login-link a {
+            color: blue;
+            text-decoration: none;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <div class="auth-buttons">
-            <button class="btn-login-btn" onclick="handleAuth(true)">Login</button>
-            <button class="btn-signup-btn" onclick="handleAuth(false)">Sign Up</button>
+    <div class="form-container">
+        <h2>Sign Up</h2>
+        <form action ="/login" method="POST">
+            <div class="input-group">
+                <input type="email" name="email" placeholder="Email" required class="full-width">
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" placeholder="Password" required class="full-width">
+            </div>
+            <button type="submit" class="submit-btn">Login</button>
+        </form>
+        <div class="login-link">
+            Haven't connected with us yet? <a href="/registration">Register</a>
         </div>
-    <script>
-        // ... (your other scripts) ...
-    </script>
+    </div>
 </body>
 </html>
-
-<%- include ('../partials/footer') %>

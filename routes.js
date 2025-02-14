@@ -3,16 +3,20 @@ import pool from './database.js';
 
 const router = express.Router();
 
-router.get('/', (req,res) => {
-    res.render("index.ejs");
+router.get('/', (req, res) => {
+    res.render('index.ejs', { 
+        isLoggedIn: req.session.isLoggedIn || false, 
+        username: req.session.username || '',
+        user: req.session.user || {}
+    });
 });
 
 router.get('/registration', (req, res) => {
     res.render("pages/registration.ejs");
 });
 
-router.post('registration', async (req, res) => {
-    const { name, age, contact, address, email, password, bloodgroup } = req.body;
+router.post('/registration', async (req, res) => {
+    const { name, age, contact, address, email, password, bloodgroup, gender } = req.body;
 
     try {
         const userExists = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
@@ -21,39 +25,97 @@ router.post('registration', async (req, res) => {
         }
 
         await pool.query(
-            "INSERT INTO users (name, age, contact, address, email, password, bloodgroup) VALUES ($1, $2, $3, $4, $5, $6, $7)",
-            [name, age, contact, address, email, password, bloodgroup]
+            "INSERT INTO users (name, age, contact, address, email, password, bloodgroup, gender) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
+            [name, age, contact, address, email, password, bloodgroup, gender]
         );
 
-        res.redirect('/');
+        res.redirect('/login');
     } catch (error) {
         console.error("Registration Error:", error);
         res.status(500).send("Server Error");
     }
 });
 
+
+router.get('/login', (req, res) => {
+    res.render('pages/login');    
+})
+
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const user = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+        const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
 
-        if (user.rows.length === 0) {
-            return res.redirect('/?error=invalid'); // Redirect with error flag
+        if (result.rows.length === 0 || result.rows[0].password !== password) {
+            return res.redirect('/?error=invalid');
         }
 
-        if (user.rows[0].password !== password) {
-            return res.redirect('/?error=invalid'); // Redirect with error flag
-        }
+        // Store user info in session
+        req.session.isLoggedIn = true;
+        req.session.email = email;
+        req.session.username = result.rows[0].name;
 
-        // Successful login - Redirect to dashboard
-        res.redirect('/blood/all');
+        res.redirect('/');
     } catch (err) {
         console.error(err.message);
         res.status(500).send("Server Error");
     }
 });
 
+
+
+router.post("/request", async (req, res) => {
+    try {
+        const { name, organ, contact_number, email, location } = req.body;
+
+        if (!name || !organ || !contact_number || !email || !location) {
+            return res.status(400).json({ message: "Missing required fields" });
+        }
+
+        const query = `INSERT INTO organ_recipient (name, organ_part, contact_number, email, location) 
+                       VALUES ($1, $2, $3, $4, $5) RETURNING *`; // Use $1, $2, ... for PostgreSQL
+        const values = [name, organ, contact_number, email, location];
+
+        const result = await pool.query(query, values); // Use pool.query() directly
+        if (organ.toLowerCase() === "blood") {
+            return res.redirect("/blood/all");
+        }
+        res.status(201).json({ message: "Request submitted successfully", data: result.rows[0] });
+    } catch (error) {
+        console.error("Error inserting data:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+router.get('/dashboard', async (req, res) => {
+    if (!req.session.email) {
+        return res.redirect('/login'); // Redirect if not logged in
+    }
+
+    try {
+        // Fetch user data from 'users' table
+        const userResult = await pool.query('SELECT * FROM users WHERE email = $1', [req.session.email]);
+
+        // Fetch recipient data from 'organ_recipient' table
+        const recipientResult = await pool.query('SELECT * FROM organ_recipient WHERE email = $1', [req.session.email]);
+
+        // Check if user exists
+        if (userResult.rows.length === 0) {
+            return res.send('User not found');
+        }
+
+        // Extract data
+        const user = userResult.rows[0];
+        const recipient = recipientResult.rows.length > 0 ? recipientResult.rows[0] : null;
+
+        // Render dashboard with both user and recipient data
+        res.render('pages/dashboard', { user, recipient });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error fetching user data');
+    }
+});
 
 
 router.get('/blood', (req,res) => {

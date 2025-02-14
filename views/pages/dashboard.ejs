@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    
+    <h2>User Information</h2>
+    <ul>
+        <li><strong>Patient ID:</strong> <%= user.id %></li>
+        <li><strong>Name:</strong> <%= user.name %></li>
+        <li><strong>Gender:</strong> <%= user.gender %></li>
+        <li><strong>Age:</strong> <%= user.age %></li>
+        <li><strong>Blood Group:</strong> <%= user.bloodgroup %></li>
+        <li><strong>Contact Number:</strong> <%= user.contact %></li>
+        <li><strong>Email:</strong> <%= user.email %></li>
+        <li><strong>Address:</strong> <%= user.address %></li>
+        <li><strong>Account Created On:</strong> <%= user.created_at %></li>
+    </ul>
+
+    <% if (recipient) { %>
+        <h2>Recipient Information</h2>
+        <ul>
+            <li><strong>Patient Name:</strong> <%= recipient.name %></li>
+            <li><strong>Organ Needed:</strong> <%= recipient.organ_part %></li>
+            <li><strong>Contact Number:</strong> <%= recipient.contact_number %></li>
+            <li><strong>Contact Email:</strong> <%= recipient.email %></li>
+            <li><strong>Location:</strong> <%= recipient.location %></li>
+        </ul>
+    <% } else { %>
+        <h3>No organ recipient data available.</h3>
+    <% } %>
+
+</body>
+</html>

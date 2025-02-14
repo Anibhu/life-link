@@ -1,47 +1,138 @@
-<%- include ('../partials/header') -%>
-
-<!-- Link Stylesheet -->
+<!-- <%- include ('../partials/header') -%> -->
 <link rel="stylesheet" href="/css/styles.css">
 
 <div class="organ">
-    <h1 class="page-heading">Organ Donation Availability</h1>
+    <h1 class="page-heading">Organ Donation Request</h1>
     
-    <!-- Include Search Bar -->
-    <%- include ('../partials/search') %>
+    <form action="/request" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
 
-    <% if (organ_donors.length > 0) { %>
-    <table>
-        <thead>
-            <tr>
-                <th>Serial No.</th>
-                <th>Body Organ Part</th>
-                <th>Hospital Name</th>
-                <th>Request</th>
-                <th>Contact No.</th>
-                <th>Location</th>
-            </tr>
-        </thead>
+        <label for="contact_number">Contact Number:</label>
+        <input type="tel" id="contact_number" name="contact_number" required>
 
-        <tbody>
-            <% organ_donors.forEach((donor, index) => { %>
-                <tr>
-                    <td><%= index + 1 %></td>
-                    <td><%= donor["organ_part"] %></td>
-                    <td><%= donor["hospital_name"] %></td>
-                    <td><%= donor["request"] %></td>
-                    <td><%= donor["contact_no"] %></td>
-                    <td><%= donor["location"] %></td>
-                </tr>
-            <% }) %>
-        </tbody>
-    </table>
-    <% } else { %>
-        <p class="no-data">No organ donors available at the moment.</p>
-    <% } %>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
 
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required>
+
+        <label for="organ">Organ Required:</label>
+        <select id="organ" name="organ" required>
+            <option value="">Select an Organ</option>
+            <option value="Kidney">Kidney</option>
+            <option value="Liver">Liver</option>
+            <option value="Lungs">Lungs</option>
+            <option value="Heart">Heart</option>
+            <option value="Pancreas">Pancreas</option>
+            <option value="Intestine">Intestine</option>
+            <option value="Cornea">Cornea</option>
+            <option value="Skin">Skin</option>
+            <option value="Bone Marrow">Bone Marrow</option>
+        </select>
+
+        <label for="blood-type">Blood Type:</label>
+        <select id="blood-type" name="blood_type" required>
+            <option value="">Select Blood Type</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+        </select>
+
+        <label for="hla-info">HLA Information:</label>
+        <input type="text" id="hla-info" name="hla_info" placeholder="Enter HLA matching details (if available)">
+
+        <label for="required-within">Required Within (Days):</label>
+        <input type="number" id="required-within" name="required_within" required>
+
+        <label for="remarks">Remarks:</label>
+        <textarea id="remarks" name="remarks" placeholder="Mention any pre-existing conditions, medical history, or special requirements..." rows="4"></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
 </div>
 
-<!-- Include Footer -->
+
+<style>
+    .organ {
+    max-width: 600px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    color: white;
+}
+
+.page-heading {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: 500;
+    margin: 0.5rem 0;
+    color: white;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #D1D5DB;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #1E3A8A;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #2563EB;
+    outline: none;
+    box-shadow: 0 0 5px rgba(37, 99, 235, 0.3);
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.checkbox-group input {
+    margin-right: 5px;
+}
+
+button {
+    background-color: #10B981;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 1rem;
+}
+
+button:hover {
+    background-color: #059669;
+}
+
+</style>
+
 <%- include ('../partials/footer') -%>
-
-</div>

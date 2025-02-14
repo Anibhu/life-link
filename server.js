@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import pool from './database.js'
 import path from "path";
 import { fileURLToPath } from "url";
+import session from 'express-session';
 
 dotenv.config();
 
@@ -17,6 +18,12 @@ app.set('views', './views');
 app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true
+}));
 
 
 const connectDB = async () => {

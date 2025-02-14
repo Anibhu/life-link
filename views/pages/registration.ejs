@@ -36,11 +36,12 @@
             gap: 10px;
             margin-bottom: 10px;
         }
-        .input-group input, .input-group select {
+        .input-group input, .input-group select, .input-group textarea {
             flex: 1;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 16px;
         }
         .full-width {
             width: 100%;
@@ -74,19 +75,21 @@
 <body>
     <div class="form-container">
         <h2>Sign Up</h2>
-        <form>
+        <form action ="/registration" method="POST"> <!-- POST request added -->
             <div class="input-group">
-                <input type="text" placeholder="First Name" required>
-                <input type="text" placeholder="Last Name" required>
+                <input type="text" name="name" placeholder="Full Name" required class="full-width">
             </div>
             <div class="input-group">
-                <input type="number" placeholder="Age" required class="full-width">
+                <input type="number" name="age" placeholder="Age" required class="full-width">
             </div>
             <div class="input-group">
-                <input type="text" placeholder="Contact Number" required class="full-width">
+                <input type="text" name="contact" placeholder="Contact Number" required class="full-width">
             </div>
             <div class="input-group">
-                <select required>
+                <textarea name="address" placeholder="Enter your full address" required class="full-width"></textarea>
+            </div>
+            <div class="input-group">
+                <select name="bloodgroup" required>
                     <option value="">Blood Group</option>
                     <option value="A+">A+</option>
                     <option value="A-">A-</option>
@@ -97,23 +100,23 @@
                     <option value="AB+">AB+</option>
                     <option value="AB-">AB-</option>
                 </select>
-                <select required>
+                <select name="gender" required>
                     <option value="">Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
-                    <option value="Other">Other</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
                 </select>
             </div>
             <div class="input-group">
-                <input type="email" placeholder="Email" required class="full-width">
+                <input type="email" name="email" placeholder="Email" required class="full-width">
             </div>
             <div class="input-group">
-                <input type="password" placeholder="Password" required class="full-width">
+                <input type="password" name="password" placeholder="Password" required class="full-width">
             </div>
             <button type="submit" class="submit-btn">Register</button>
         </form>
         <div class="login-link">
-            Already have an account? <a href="/index">Login</a>
+            Already have an account? <a href="/login">Login</a>
         </div>
     </div>
 </body>
