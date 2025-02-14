@@ -23,7 +23,10 @@
         </ul>
         <div class="auth-buttons">
             <% if (isLoggedIn) { %>
-                <span class="username">Welcome, <%= username %>!</span>
+                <span class="username">
+                    <a href="/dashboard" style="text-decoration: none; color: inherit;">
+                    Welcome, <%= username %>!
+                </a></span>
             <% } else { %>
                 <button class="btn-login-btn" onclick="window.location.href='/login'">Login</button>
                 <button class="btn-signup-btn" onclick="window.location.href='/registration'">Sign Up</button>
