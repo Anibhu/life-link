@@ -24,9 +24,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3); /* Reduced opacity to make the background more visible */
+    background: rgba(0, 0, 0, 0.3);
     z-index: 0;
-<<<<<<< HEAD
     box-sizing: border-box;
     scroll-behavior: smooth;
     font-family: Arial, sans-serif;
@@ -93,10 +92,6 @@ section {
 }
 
 #home {
-=======
-}
-.search-form {
->>>>>>> origin/uiux
     display: flex;
     justify-content: center;
     align-items: center;
@@ -382,10 +377,4 @@ footer {
     color: #ff7200;
     border: 1px solid #ff7200;
 }
-<<<<<<< HEAD
 }
-=======
-/*
-
-*/
->>>>>>> origin/uiux
