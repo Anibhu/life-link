@@ -17,16 +17,20 @@
         <ul class="nav-links">
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="#hospitals">Hospitals</a></li>
-            <li><a href="#dashboard">Dashboard</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="auth-buttons">
             <% if (isLoggedIn) { %>
                 <span class="username">
                     <a href="/dashboard" style="text-decoration: none; color: inherit;">
-                    Welcome, <%= username %>!
-                </a></span>
+                        <%= username %>!
+                    </a>
+                </span>
+                <form action="/logout" method="POST" style="display: inline;">
+                    <button type="submit" style="border: none; background: none; cursor: pointer;">
+                        🔒
+                    </button>
+                </form>         
             <% } else { %>
                 <button class="btn-login-btn" onclick="window.location.href='/login'">Login</button>
                 <button class="btn-signup-btn" onclick="window.location.href='/registration'">Sign Up</button>
@@ -46,8 +50,8 @@
                 <h2>Give the Gift of Life - Donate Blood & Organs</h2>
             </div>
             <div class="cta-buttons">
-                <button class="btn-register-btn" onclick="window.location.href='/organs'">Register as a Donor</button>
-                <button class="btn-request-btn" onclick="window.location.href='/organs'">Looking for Transplant</button>
+                <button class="btn-register-btn" onclick="window.location.href='/donor_registration'">Register as a Donor</button>
+                <button class="btn-request-btn" onclick="window.location.href='/organs'">Looking for a Donor</button>
             </div>
         </div>
     </section>
@@ -57,8 +61,7 @@
         <div class="about-content">
             <img src="images/Blood-Donation-2.jpg" alt="Blood Donation">
             <p>
-                We are a non-profit organization dedicated to connecting donors with patients in need. 
-                Our platform ensures a seamless process for blood and organ donation, saving lives every day.
+                LifeLink is a platform dedicated to connecting patients in need of organ transplants and blood donations with compatible donors. Our mission is to bridge the gap between donors and recipients by providing a seamless and efficient system for registration, searching, and matching. Users can create accounts, register as donors, and request organ transplants while hospitals can update real-time availability. With an easy-to-use dashboard, patients can track their requests, view donor details, and stay informed about their health needs. LifeLink ensures secure authentication, user-friendly navigation, and a reliable database, making the process of saving lives more accessible and efficient.
             </p>
         </div>
     </section>

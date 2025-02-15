@@ -45,27 +45,41 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     try {
+        // Query to check if the user exists
         const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
 
-        if (result.rows.length === 0 || result.rows[0].password !== password) {
-            return res.redirect('/?error=invalid');
+        // Check if the user exists
+        if (result.rows.length === 0) {
+            return res.render('pages/login', { error: 'Email not registered' });
+        }
+
+        // Check if the password is correct
+        const user = result.rows[0];
+        if (user.password !== password) {
+            return res.render('pages/login', { error: 'Incorrect password' });
         }
 
         // Store user info in session
         req.session.isLoggedIn = true;
         req.session.email = email;
-        req.session.username = result.rows[0].name;
+        req.session.username = user.name;
 
-        res.redirect('/');
+        // Redirect to the stored page or home
+        const redirectTo = req.session.redirectTo || '/';
+        delete req.session.redirectTo; // Remove stored redirect after using it
+
+        res.redirect(redirectTo);
     } catch (err) {
         console.error(err.message);
         res.status(500).send("Server Error");
     }
 });
 
-
-
 router.post("/request", async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        return res.redirect('/login');
+    }
+
     try {
         const { name, organ, contact_number, email, location } = req.body;
 
@@ -74,10 +88,10 @@ router.post("/request", async (req, res) => {
         }
 
         const query = `INSERT INTO organ_recipient (name, organ_part, contact_number, email, location) 
-                       VALUES ($1, $2, $3, $4, $5) RETURNING *`; // Use $1, $2, ... for PostgreSQL
+                       VALUES ($1, $2, $3, $4, $5) RETURNING *`;
         const values = [name, organ, contact_number, email, location];
 
-        const result = await pool.query(query, values); // Use pool.query() directly
+        const result = await pool.query(query, values);
         if (organ.toLowerCase() === "blood") {
             return res.redirect("/blood/all");
         }
@@ -88,28 +102,22 @@ router.post("/request", async (req, res) => {
     }
 });
 
+
 router.get('/dashboard', async (req, res) => {
     if (!req.session.email) {
-        return res.redirect('/login'); // Redirect if not logged in
+        return res.redirect('/login');
     }
 
     try {
-        // Fetch user data from 'users' table
         const userResult = await pool.query('SELECT * FROM users WHERE email = $1', [req.session.email]);
-
-        // Fetch recipient data from 'organ_recipient' table
         const recipientResult = await pool.query('SELECT * FROM organ_recipient WHERE email = $1', [req.session.email]);
 
-        // Check if user exists
         if (userResult.rows.length === 0) {
             return res.send('User not found');
         }
-
-        // Extract data
         const user = userResult.rows[0];
         const recipient = recipientResult.rows.length > 0 ? recipientResult.rows[0] : null;
 
-        // Render dashboard with both user and recipient data
         res.render('pages/dashboard', { user, recipient });
     } catch (err) {
         console.error(err);
@@ -117,14 +125,23 @@ router.get('/dashboard', async (req, res) => {
     }
 });
 
-
-router.get('/blood', (req,res) => {
-    res.render("blood.ejs");
+router.post('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            console.error("Logout error:", err);
+            return res.redirect('/dashboard');
+        }
+        res.redirect('/');
+    });
 });
 
 router.get('/blood/all', async (req, res) => {
     try {
         const data = await pool.query("SELECT * FROM donors");
+        if (!req.session.email) {  
+            req.session.redirectTo = '/blood/all';
+            return res.redirect('/login'); 
+        }
         res.render('pages/blood_donor_list.ejs', { blood_donors : data.rows});
 
     } catch (error) {
@@ -134,6 +151,10 @@ router.get('/blood/all', async (req, res) => {
 })
 
 router.get('/blood/search', async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        return res.redirect('/login');
+    }
+
     try {
         const { query } = req.query;
 
@@ -157,7 +178,7 @@ router.get('/blood/search', async (req, res) => {
                 OR "contact" ILIKE ${placeholder} 
                 OR "pid"::TEXT ILIKE ${placeholder}
             `);
-            
+
             values.push(`%${term}%`);
         });
 
@@ -172,16 +193,44 @@ router.get('/blood/search', async (req, res) => {
     }
 });
 
-
-
-
-router.get('/organs', (req,res) => {
+router.get('/organs', (req, res) => {
+    if (!req.session.isLoggedIn) {
+        return res.redirect('/login');
+    }
     res.render("pages/organ");
 });
 
-router.get('/tissue', (req,res) => {
-    res.send("Welcome to the tissue page");
+
+router.get('/donor_registration', (req, res) => {
+    if (!req.session.isLoggedIn) {
+        return res.redirect('/login');
+    }
+    res.render('pages/donor_registration');
 });
+
+
+router.post('/donor_registration', async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        return res.redirect('/login');
+    }
+
+    const { name, age, bloodgroup, location, contact } = req.body;
+
+    try {
+        const query = "INSERT INTO donors (name, age, bloodgroup, location, contact) VALUES ($1, $2, $3, $4, $5)";
+        await pool.query(query, [name, age, bloodgroup, location, contact]);
+
+        res.redirect('/dashboard');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error registering donor");
+    }
+});
+
+router.get('/health_check', (req, res) => {
+    res.status(200).send("<h2>Service is running smoothly ✅</h2>");
+});
+
 
 router.get('*', (req,res) => {
     res.render('pages/page_not_found');

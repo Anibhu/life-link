@@ -1,0 +1,102 @@
+<!-- <%- include ('../partials/header') -%> -->
+<link rel="stylesheet" href="/css/styles.css">
+
+<div class="donor-form">
+    <h1 class="page-heading">Donor Registration</h1>
+
+    <form action="/donor_registration" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+
+        <label for="bloodgroup">Blood Group:</label>
+        <select id="bloodgroup" name="bloodgroup" required>
+            <option value="">Select Blood Group</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+        </select>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required>
+
+        <label for="contact">Contact Number:</label>
+        <input type="tel" id="contact" name="contact" required>
+
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+<style>
+    .donor-form {
+        max-width: 500px;
+        margin: 4rem auto;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+        color: white;
+    }
+
+    .page-heading {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        color: white;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        font-weight: 500;
+        margin: 0.5rem 0;
+        color: white;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #D1D5DB;
+        border-radius: 5px;
+        font-size: 1rem;
+        color: #1E3A8A;
+    }
+
+    input:focus, select:focus {
+        border-color: #2563EB;
+        outline: none;
+        box-shadow: 0 0 5px rgba(37, 99, 235, 0.3);
+    }
+
+    button {
+        background-color: #10B981;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.3s;
+        margin-top: 1rem;
+    }
+
+    button:hover {
+        background-color: #059669;
+    }
+</style>
+
+<%- include ('../partials/footer') -%>

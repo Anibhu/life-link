@@ -4,35 +4,189 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
 </head>
-<body>
-    <h1>Dashboard</h1>
-    
-    <h2>User Information</h2>
-    <ul>
-        <li><strong>Patient ID:</strong> <%= user.id %></li>
-        <li><strong>Name:</strong> <%= user.name %></li>
-        <li><strong>Gender:</strong> <%= user.gender %></li>
-        <li><strong>Age:</strong> <%= user.age %></li>
-        <li><strong>Blood Group:</strong> <%= user.bloodgroup %></li>
-        <li><strong>Contact Number:</strong> <%= user.contact %></li>
-        <li><strong>Email:</strong> <%= user.email %></li>
-        <li><strong>Address:</strong> <%= user.address %></li>
-        <li><strong>Account Created On:</strong> <%= user.created_at %></li>
-    </ul>
-
-    <% if (recipient) { %>
-        <h2>Recipient Information</h2>
-        <ul>
-            <li><strong>Patient Name:</strong> <%= recipient.name %></li>
-            <li><strong>Organ Needed:</strong> <%= recipient.organ_part %></li>
-            <li><strong>Contact Number:</strong> <%= recipient.contact_number %></li>
-            <li><strong>Contact Email:</strong> <%= recipient.email %></li>
-            <li><strong>Location:</strong> <%= recipient.location %></li>
+<body class="dashboard-body">
+    <nav class="navbar">
+        <div class="logo">
+            <img src="images/hospital.png" alt="LifeLink Logo">
+            <h1>LifeLink</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/dashboard" class="active">Dashboard</a></li>
+            <li><a href="/donate">Donate</a></li>
+            <li><a href="/request">Request</a></li>
+            <li><a href="/profile">Profile</a></li>
         </ul>
-    <% } else { %>
-        <h3>No organ recipient data available.</h3>
-    <% } %>
+        <form action="/logout" method="POST">
+            <button type="submit" class="btn-logout">Log Out</button>
+        </form>
+    </nav>
 
+    <div class="dashboard-container">
+        <h1 class="page-heading">Dashboard</h1>
+
+        <div class="card">
+            <h2 class="section-heading">User Information</h2>
+            <ul class="info-list">
+                <li><strong>Patient ID:</strong> <span><%= user.id %></span></li>
+                <li><strong>Name:</strong> <span><%= user.name %></span></li>
+                <li><strong>Gender:</strong> <span><%= user.gender %></span></li>
+                <li><strong>Age:</strong> <span><%= user.age %></span></li>
+                <li><strong>Blood Group:</strong> <span><%= user.bloodgroup %></span></li>
+                <li><strong>Contact Number:</strong> <span><%= user.contact %></span></li>
+                <li><strong>Email:</strong> <span><%= user.email %></span></li>
+                <li><strong>Address:</strong> <span><%= user.address %></span></li>
+                <li><strong>Account Created On:</strong> <span><%= user.created_at %></span></li>
+            </ul>
+        </div>
+
+        <% if (recipient) { %>
+        <div class="card">
+            <h2 class="section-heading">Patient Information</h2>
+            <ul class="info-list">
+                <li><strong>Patient Name:</strong> <span><%= recipient.name %></span></li>
+                <li><strong>Organ Needed:</strong> <span><%= recipient.organ_part %></span></li>
+                <li><strong>Contact Number:</strong> <span><%= recipient.contact_number %></span></li>
+                <li><strong>Contact Email:</strong> <span><%= recipient.email %></span></li>
+                <li><strong>Location:</strong> <span><%= recipient.location %></span></li>
+            </ul>
+        </div>
+        <% } else { %>
+        <div class="card no-data">
+            <h3>No organ recipient data available.</h3>
+        </div>
+        <% } %>
+    </div>
 </body>
 </html>
+
+<style>
+    body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F9FAFB;
+    color: #1F2937;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: linear-gradient(to right, #1E3A8A, #2563EB);
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-logout {
+    background-color: white;
+    color: #1E3A8A;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-logout:hover {
+    background-color: #F59E0B;
+    color: white;
+}
+
+.dashboard-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    text-align: center;
+}
+
+.page-heading {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2563EB;
+    margin-bottom: 1rem;
+}
+
+.card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.section-heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1E3A8A;
+    margin-bottom: 1rem;
+}
+
+.info-list {
+    list-style: none;
+    padding: 0;
+}
+
+.info-list li {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.info-list strong {
+    color: #2563EB;
+}
+
+.info-list span {
+    color: #4B5563;
+}
+
+.no-data {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #D1D5DB;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adds spacing between logo and text */
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0; /* Remove default margin */
+}
+
+
+</style>

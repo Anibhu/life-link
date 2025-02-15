@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <title>Log In</title>
     <style>
         * {
             margin: 0;
@@ -70,23 +70,42 @@
         .login-link a:hover {
             text-decoration: underline;
         }
+        .error-message {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 10px;
+    background: rgba(255, 0, 0, 0.1);
+    padding: 8px;
+    border-radius: 5px;
+}
+
     </style>
 </head>
-<body>
-    <div class="form-container">
-        <h2>Sign Up</h2>
-        <form action ="/login" method="POST">
-            <div class="input-group">
-                <input type="email" name="email" placeholder="Email" required class="full-width">
+    <body>
+        <div class="form-container">
+            <h2>Log In</h2>
+            <form action="/login" method="POST">
+                <% if (typeof error !== 'undefined') { %>
+                    <div class="error-message"><%= error %></div>
+                <% } %>
+                <div class="input-group">
+                    <input type="email" name="email" placeholder="Email" required class="full-width">
+                </div>
+                <div class="input-group">
+                    <input type="password" name="password" placeholder="Password" required class="full-width">
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+            </form>
+            <div class="login-link">
+                Haven't connected with us yet? <a href="/registration">Register</a>
             </div>
-            <div class="input-group">
-                <input type="password" name="password" placeholder="Password" required class="full-width">
-            </div>
-            <button type="submit" class="submit-btn">Login</button>
-        </form>
-        <div class="login-link">
-            Haven't connected with us yet? <a href="/registration">Register</a>
         </div>
-    </div>
-</body>
+    </body>
 </html>
+<script>
+    document.getElementById("login-form").addEventListener("submit", function() {
+    document.getElementById("login-btn").disabled = true;
+});
+
+</script>
