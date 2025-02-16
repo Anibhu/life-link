@@ -1,30 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="/css/dashboard.css">
-</head>
-<body class="dashboard-body">
-    <nav class="navbar">
-        <div class="logo">
-            <img src="images/hospital.png" alt="LifeLink Logo">
-            <h1>LifeLink</h1>
-        </div>
-        <ul class="nav-links">
-            <li><a href="/dashboard" class="active">Dashboard</a></li>
-            <li><a href="/donate">Donate</a></li>
-            <li><a href="/request">Request</a></li>
-            <li><a href="/profile">Profile</a></li>
-        </ul>
-        <form action="/logout" method="POST">
-            <button type="submit" class="btn-logout">Log Out</button>
-        </form>
-    </nav>
-
-    <div class="dashboard-container">
-        <h1 class="page-heading">Dashboard</h1>
+<%- include('../partials/header')  %>
+<div class="profile-container">
+        <h1 class="page-heading">PROFILE</h1>
 
         <div class="card">
             <h2 class="section-heading">User Information</h2>
@@ -69,54 +45,7 @@
     background-color: #F9FAFB;
     color: #1F2937;
 }
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background: linear-gradient(to right, #1E3A8A, #2563EB);
-    color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 8px 16px;
-    transition: 0.3s;
-    border-radius: 5px;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.btn-logout {
-    background-color: white;
-    color: #1E3A8A;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.btn-logout:hover {
-    background-color: #F59E0B;
-    color: white;
-}
-
-.dashboard-container {
+.profile-container {
     max-width: 800px;
     margin: 2rem auto;
     padding: 1rem;

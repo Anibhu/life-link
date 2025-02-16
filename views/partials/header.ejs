@@ -4,17 +4,253 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LifeLink</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <a href="#" class="logo">LifeLink</a>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="/images/hospital.png" alt="Logo">
+            <h1><a href="/" style="all: unset;">LIFE LINK</a></h1>
+        </div>
 
-        <nav>
-            <a href="#home" class="active">Home</a>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#contact">Contact</a>
-        </nav>
-        
-    </header>
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <ul class="nav-links" id="dropdown-menu">
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+
+            <!-- Authentication Section inside menu -->
+            <div class="auth-section">
+                <% if (isLoggedIn) { %>
+                    <span class="username">
+                        <a href="/profile" style="text-decoration: none; color: inherit;">
+                            Welcome, <%= username %>!
+                        </a>
+                    </span>
+                    <form action="/logout" method="POST">
+                        <button class="btn btn-logout-btn" type="submit">Logout</button>
+                    </form>
+                <% } else { %>
+                    <button class="btn btn-login-btn" onclick="window.location.href='/login'">Login</button>
+                    <button class="btn btn-signup-btn" onclick="window.location.href='/registration'">Sign Up</button>
+                <% } %>
+            </div>
+        </ul>
+    </nav>
+
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            line-height: 1.6;
+            background-color: #F9FAFB;
+            color: #1F2937;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: linear-gradient(to right, #1E3A8A, #2563EB);
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        /* Logo */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .logo h1 a {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Desktop Navigation */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li {
+            display: inline;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Authentication Buttons */
+        .btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-login-btn, 
+        .btn-signup-btn {
+            background-color: white;
+            color: #1E3A8A;
+        }
+
+        .btn-login-btn:hover, 
+        .btn-signup-btn:hover {
+            background-color: #F59E0B;
+            color: white;
+        }
+
+        /* Logout Button */
+        .btn-logout-btn {
+            background-color: #DC2626; /* Red for logout */
+            color: white;
+        }
+
+        .btn-logout-btn:hover {
+            background-color: #B91C1C;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+
+        .bar {
+            height: 4px;
+            width: 25px;
+            background-color: white;
+            margin: 4px 0;
+            transition: 0.3s;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            /* Hide desktop nav links */
+            .nav-links {
+                display: none;
+            }
+
+            /* Mobile Menu */
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                padding: 1.5rem 0;
+                text-align: center;
+                backdrop-filter: blur(15px); /* Blur Effect */
+                background: rgba(30, 58, 138, 0.9); /* Semi-transparent Blue */
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                border-radius: 0 0 10px 10px;
+                z-index: 999;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                padding: 15px 0; /* More space */
+            }
+
+            .nav-links a {
+                display: block;
+                font-size: 1.2rem;
+                font-weight: 500;
+            }
+
+            /* Authentication Section Inside Menu */
+            .auth-section {
+                display: flex;
+                flex-direction: column;
+                gap: 20px; /* More space */
+                width: 100%;
+                padding-top: 1.5rem;
+            }
+
+            .auth-section .btn {
+                width: 80%;
+                margin: 5px auto;
+                padding: 12px;
+                font-size: 1.1rem;
+            }
+
+            /* Show menu toggle */
+            .menu-toggle {
+                display: flex;
+            }
+
+            /* Hamburger Animation */
+            .menu-toggle.active .bar:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+
+            .menu-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active .bar:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.getElementById("mobile-menu");
+            const mobileMenu = document.getElementById("dropdown-menu");
+
+            menuToggle.addEventListener("click", function () {
+                mobileMenu.classList.toggle("show");
+                menuToggle.classList.toggle("active");
+            });
+        });
+    </script>
+
+</body>
+</html>

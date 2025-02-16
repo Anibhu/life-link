@@ -1,4 +1,4 @@
-<!-- <%- include ('../partials/header') -%> -->
+<%- include ('../partials/header') -%>
 <link rel="stylesheet" href="/css/styles.css">
 <div class = "blood">
     <h1>Donor List</h1>
@@ -34,5 +34,84 @@
     </table>
     
 </div>
+
+<style>
+    body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #F9FAFB;
+    color: #1F2937;
+}
+
+.blood {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.blood h1 {
+    color: #1E3A8A;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+th {
+    background: #1E3A8A;
+    color: white;
+    font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+    background: #F1F5F9;
+}
+
+tbody tr:hover {
+    background: #E0E7FF;
+    cursor: pointer;
+}
+
+td {
+    color: #333;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .blood {
+        width: 95%;
+        padding: 15px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+}
+
+</style>
 
 <%- include ('../partials/footer') -%>

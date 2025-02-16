@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Assuming this is your main stylesheet -->
+</head>
+<body>
+    <div class="container">
+        <div class="error-box">
+            <h1>Error</h1>
+            <p><%= error %></p>
+            <a href="/" class="btn">Go to Home</a>
+        </div>
+        
+    </div>
+</body>
+</html>
+
+<style>
+    /* styles.css */
+
+/* General Reset */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Centering container */
+.container {
+    text-align: center;
+    max-width: 500px;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.container:hover {
+    transform: scale(1.02);
+}
+
+/* Error Box */
+.error-box {
+    padding: 1.5rem;
+}
+
+.error-box h1 {
+    font-size: 2rem;
+    color: #d9534f; /* Bootstrap danger red */
+    margin-bottom: 1rem;
+}
+
+.error-box p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Button */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #fff;
+    background: #007bff;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: #0056b3;
+}
+
+</style>

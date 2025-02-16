@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospitals</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: #ffffff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        tr:hover {
+            background: #f1f1f1;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+    <script>
+        async function requestHospital(serialNo, hospitalEmail) {
+            const button = document.getElementById(`request-btn-${serialNo}`);
+            const statusCell = document.getElementById(`status-${serialNo}`);
+
+            button.disabled = true;
+            button.innerText = "Requesting...";
+
+            try {
+                const response = await fetch("/hospitals/request", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ serial_no: serialNo, hospital_email: hospitalEmail })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    button.innerText = "Requested";
+                    statusCell.innerText = "Waiting for response";
+                } else {
+                    button.innerText = "Request";
+                    button.disabled = false;
+                    alert("Request failed: " + result.error);
+                }
+            } catch (error) {
+                button.innerText = "Request";
+                button.disabled = false;
+                alert("An error occurred while sending the request.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Hospitals</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Serial No</th>
+                <th>Hospital Name</th>
+                <th>Location</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Request</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% hospitals.forEach(hospital => { %>
+                <tr>
+                    <td><%= hospital.serial_no %></td>
+                    <td><%= hospital.hospital_name %></td>
+                    <td><%= hospital.location %></td>
+                    <td><%= hospital.contact_number %></td>
+                    <td><%= hospital.email %></td>
+                    <td id="status-<%= hospital.serial_no %>">Not Requested</td>
+                    <td>
+                        <button id="request-btn-<%= hospital.serial_no %>" 
+                                onclick="requestHospital('<%= hospital.serial_no %>', '<%= hospital.email %>')">
+                            Request
+                        </button>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>

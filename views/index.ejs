@@ -1,48 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LifeLink</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="logo">
-            <img src="images/hospital.png" alt="Logo">
-            <h1>LIFE-LINK</h1>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#home" class="active">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="auth-buttons">
-            <% if (isLoggedIn) { %>
-                <span class="username">
-                    <a href="/dashboard" style="text-decoration: none; color: inherit;">
-                        <%= username %>!
-                    </a>
-                </span>
-                <form action="/logout" method="POST" style="display: inline;">
-                    <button type="submit" style="border: none; background: none; cursor: pointer;">
-                        🔒
-                    </button>
-                </form>         
-            <% } else { %>
-                <button class="btn-login-btn" onclick="window.location.href='/login'">Login</button>
-                <button class="btn-signup-btn" onclick="window.location.href='/registration'">Sign Up</button>
-            <% } %>
-        </div>
-        <div class="menu-toggle" id="mobile-menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-    </nav>
-
+<%- include('partials/header')  %>
     <section id="home" class="hero">
         <div class="hero-content">
             <h1>Save Lives, Donate Today</h1>
@@ -120,222 +76,153 @@
 </html>
 
 <style>
+
+/* General Styles */
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    line-height: 1.6;
     background-color: #F9FAFB;
     color: #1F2937;
 }
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background: linear-gradient(to right, #1E3A8A, #2563EB);
-    color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.logo img {
-    width: 40px;
-    height: 40px;
-}
-
-.logo h1 {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-links li {
-    display: inline;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 8px 16px;
-    transition: 0.3s;
-    border-radius: 5px;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.auth-buttons {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.btn-login-btn, .btn-signup-btn {
-    background-color: white;
-    color: #1E3A8A;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.btn-login-btn:hover, .btn-signup-btn:hover {
-    background-color: #F59E0B;
-    color: white;
-}
-
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-}
-
-.bar {
-    height: 4px;
-    width: 25px;
-    background-color: white;
-    margin: 4px 0;
-    transition: 0.3s;
-}
-
+/* Hero, About, and Contact Sections */
 .hero, .about, .contact {
     text-align: center;
-    padding: 4rem 2rem;
+    padding: 5rem 2rem;
 }
 
 .hero {
-    background-color: #1E3A8A;
+    background: linear-gradient(to right, #1E3A8A, #2563EB);
     color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero h1, .about h2, .contact h2 {
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
-    color: #2563EB;
 }
 
 .about, .contact {
-        background: linear-gradient(to right, #1E3A8A, #2563EB);
-        text-align: center;
-        padding: 4rem 2rem;
-        color: white;
-    }
+    background: linear-gradient(to right, #1E3A8A, #2563EB);
+    color: white;
+}
 
-    .about img { 
-        width: 50%; max-width: 400px; border-radius: 10px; 
-    }
+.about img {
+    width: 50%;
+    max-width: 400px;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
 
+/* Buttons */
 .btn-register-btn, .btn-request-btn {
     padding: 1rem 2rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: 500;
+    font-weight: 600;
     color: white;
     margin: 0.5rem;
+    font-size: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.btn-register-btn { background-color: #10B981; }
-.btn-request-btn { background-color: #F59E0B; }
-.btn-register-btn:hover, .btn-request-btn:hover { opacity: 0.9; }
+.btn-register-btn {
+    background-color: #10B981;
+}
 
+.btn-request-btn {
+    background-color: #F59E0B;
+}
+
+.btn-register-btn:hover, .btn-request-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Contact Section */
 .contact-content {
-        max-width: 600px;
-        margin: 0 auto;
-    }
+    max-width: 600px;
+    margin: 0 auto;
+}
 
-    .contact h2, .about h2 {
-        font-size: 2rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-        color: white;
-    }
+.contact p, .about p {
+    font-size: 1.1rem;
+    color: #E0E7FF;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
 
-    .contact p, .about p {
-        font-size: 1rem;
-        color: #E0E7FF;
-        margin-bottom: 2rem;
-    }
+/* Contact Form */
+.contact-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 2rem auto;
+}
 
-    .contact-form {
-        background: white;
-        padding: 2rem;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        max-width: 500px;
-        margin: 0 auto;
-    }
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
 
-    .form-group {
-        margin-bottom: 1.5rem;
-        text-align: left;
-    }
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #1E3A8A;
+}
 
-    .form-group label {
-        display: block;
-        font-weight: 500;
-        margin-bottom: 0.5rem;
-        color: #1E3A8A;
-    }
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #D1D5DB;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
 
-    .form-group input,
-    .form-group textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #D1D5DB;
-        border-radius: 5px;
-        font-size: 1rem;
-        transition: border-color 0.3s;
-    }
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #2563EB;
+    outline: none;
+    box-shadow: 0 0 8px rgba(37, 99, 235, 0.3);
+}
 
-    .form-group input:focus,
-    .form-group textarea:focus {
-        border-color: #2563EB;
-        outline: none;
-        box-shadow: 0 0 5px rgba(37, 99, 235, 0.3);
-    }
+/* Submit Button */
+.btn-submit {
+    background-color: #2563EB;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    width: 100%;
+}
 
-    .btn-submit {
-        background-color: #2563EB;
-        color: white;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 5px;
-        font-size: 1rem;
-        font-weight: 500;
-        cursor: pointer;
-        transition: background 0.3s;
-        width: 100%;
-    }
+.btn-submit:hover {
+    background-color: #1E40AF;
+    transform: translateY(-2px);
+}
 
-    .btn-submit:hover {
-        background-color: #1E40AF;
-    }
-
-    #form-response {
-        margin-top: 1rem;
-        font-weight: 500;
-        color: #16A34A;
-    }
+/* Form Response */
+#form-response {
+    margin-top: 1rem;
+    font-weight: 600;
+    color: #16A34A;
+}
 </style>
+
+<%- include('partials/footer') %>

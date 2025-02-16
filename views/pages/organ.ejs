@@ -1,4 +1,4 @@
-<!-- <%- include ('../partials/header') -%> -->
+<%- include ('../partials/header') -%>
 <link rel="stylesheet" href="/css/styles.css">
 
 <div class="organ">
@@ -58,80 +58,98 @@
     </form>
 </div>
 
-
 <style>
-    .organ {
+/* Global Styles - Consistency Across All Pages */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #F1F5F9; /* Light background */
+    color: #1E293B; /* Dark text for readability */
+    margin: 0;
+    padding: 0;
+}
+
+/* Container Styling */
+.organ {
     max-width: 600px;
     margin: 4rem auto;
     padding: 2rem;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.95); /* Slightly transparent for depth */
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
-    color: white;
+    backdrop-filter: blur(4px);
+    color: #1E293B; /* Dark text */
 }
 
-.page-heading {
+/* Page Heading */
+.organ .page-heading {
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 1.5rem;
-    color: white;
+    color: #1E3A8A; /* Deep blue for clear visibility */
 }
 
-form {
+/* Form */
+.organ form {
     display: flex;
     flex-direction: column;
 }
 
-label {
-    font-weight: 500;
+/* Labels */
+.organ label {
+    font-weight: 600;
     margin: 0.5rem 0;
-    color: white;
+    color: #111827; /* Very dark for strong contrast */
 }
 
-input, select, textarea {
+/* Inputs, Select, Textarea */
+.organ input,
+.organ select,
+.organ textarea {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-top: 5px;
-    border: 1px solid #D1D5DB;
-    border-radius: 5px;
+    border: 1px solid #6B7280; /* Darker gray for visibility */
+    border-radius: 8px;
     font-size: 1rem;
-    color: #1E3A8A;
+    color: #111827; /* Dark text for easy reading */
+    background: #ffffff; /* Pure white for contrast */
+    transition: border 0.3s, box-shadow 0.3s;
 }
 
-input:focus, select:focus, textarea:focus {
-    border-color: #2563EB;
+/* Placeholder Styling */
+.organ input::placeholder,
+.organ textarea::placeholder {
+    color: #4B5563; /* Darker gray for better visibility */
+}
+
+/* Input Focus Effects */
+.organ input:focus,
+.organ select:focus,
+.organ textarea:focus {
+    border-color: #1E40AF; /* Highlight */
     outline: none;
-    box-shadow: 0 0 5px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 0 8px rgba(30, 64, 175, 0.3);
 }
 
-.checkbox-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 5px;
-}
-
-.checkbox-group input {
-    margin-right: 5px;
-}
-
-button {
-    background-color: #10B981;
+/* Button */
+.organ button {
+    background-color: #1E40AF; /* Deep blue button */
     color: white;
     padding: 12px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.2s;
     margin-top: 1rem;
 }
 
-button:hover {
-    background-color: #059669;
+/* Button Hover Effect */
+.organ button:hover {
+    background-color: #1E3A8A; /* Darker blue */
+    transform: scale(1.05);
 }
 
 </style>

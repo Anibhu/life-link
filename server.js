@@ -7,6 +7,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 import session from 'express-session';
 
+
+
 dotenv.config();
 
 const app = express();
@@ -18,6 +20,8 @@ app.set('views', './views');
 app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.json());
+
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -25,6 +29,11 @@ app.use(session({
     saveUninitialized: true
 }));
 
+app.use((req, res, next) => {
+    res.locals.isLoggedIn = req.session.isLoggedIn || false;
+    res.locals.username = req.session.username || "";
+    next();
+});
 
 const connectDB = async () => {
     try{
