@@ -15,23 +15,26 @@
             <h1><a href="/" style="all: unset;">LIFE LINK</a></h1>
         </div>
 
+        <!-- Hamburger Menu Toggle -->
         <div class="menu-toggle" id="mobile-menu">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
         </div>
 
+        <!-- Navigation Links -->
         <ul class="nav-links" id="dropdown-menu">
             <li><a href="/" class="active">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="/hospitals">Hospitals</a></li>
+            <li><a href="/#contact">Contact</a></li>
 
             <!-- Authentication Section inside menu -->
             <div class="auth-section">
                 <% if (isLoggedIn) { %>
                     <span class="username">
                         <a href="/profile" style="text-decoration: none; color: inherit;">
-                            Welcome, <%= username %>!
+                            <!-- <%= username %> -->
+                            Profile
                         </a>
                     </span>
                     <form action="/logout" method="POST">
@@ -46,7 +49,7 @@
     </nav>
 
     <style>
-        /* General Styles */
+        /* Global Styling */
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
@@ -67,6 +70,7 @@
             color: white;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             position: relative;
+            flex-wrap: wrap; /* Ensures items don’t break unnecessarily */
         }
 
         /* Logo */
@@ -88,13 +92,14 @@
             color: white;
         }
 
-        /* Desktop Navigation */
+        /* Navigation Links */
         .nav-links {
             list-style: none;
             display: flex;
             gap: 20px;
             margin: 0;
             padding: 0;
+            align-items: center; /* Ensure items are vertically centered */
         }
 
         .nav-links li {
@@ -115,23 +120,36 @@
             background-color: rgba(255, 255, 255, 0.2);
         }
 
-        /* Authentication Buttons */
+        /* Authentication Section */
+        .auth-section {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between Profile and Logout */
+        }
+
+        /* Username/Profile Link */
+        .username {
+            margin-right: 10px; /* Add spacing between Profile and Logout */
+        }
+
+        /* Buttons */
         .btn {
-            padding: 10px 16px;
+            padding: 8px 12px;
             border: none;
             border-radius: 5px;
             font-weight: 500;
+            font-size: 0.9rem;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.2s;
         }
 
-        .btn-login-btn, 
+        .btn-login-btn,
         .btn-signup-btn {
             background-color: white;
             color: #1E3A8A;
         }
 
-        .btn-login-btn:hover, 
+        .btn-login-btn:hover,
         .btn-signup-btn:hover {
             background-color: #F59E0B;
             color: white;
@@ -141,6 +159,14 @@
         .btn-logout-btn {
             background-color: #DC2626; /* Red for logout */
             color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            white-space: nowrap; /* Prevent text from wrapping */
         }
 
         .btn-logout-btn:hover {
@@ -149,15 +175,16 @@
 
         /* Mobile Menu Toggle */
         .menu-toggle {
-            display: none;
+            display: none; /* Hidden by default */
             flex-direction: column;
             cursor: pointer;
             position: absolute;
             right: 20px;
             top: 15px;
+            z-index: 1000; /* Ensure it's above other elements */
         }
 
-        .bar {
+        .menu-toggle .bar {
             height: 4px;
             width: 25px;
             background-color: white;
@@ -166,19 +193,22 @@
         }
 
         /* Responsive Design */
-        @media screen and (max-width: 768px) {
-            /* Hide desktop nav links */
-            .nav-links {
-                display: none;
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: center;
             }
 
-            /* Mobile Menu */
+            .menu-toggle {
+                display: flex; /* Show the hamburger menu */
+            }
+
             .nav-links {
-                display: none;
+                display: none; /* Hide by default */
                 flex-direction: column;
                 width: 100%;
                 position: absolute;
-                top: 60px;
+                top: 60px; /* Adjust based on your navbar height */
                 left: 0;
                 padding: 1.5rem 0;
                 text-align: center;
@@ -190,39 +220,21 @@
             }
 
             .nav-links.show {
-                display: flex;
+                display: flex; /* Show when toggled */
             }
 
-            .nav-links li {
-                width: 100%;
-                padding: 15px 0; /* More space */
-            }
-
-            .nav-links a {
-                display: block;
-                font-size: 1.2rem;
-                font-weight: 500;
-            }
-
-            /* Authentication Section Inside Menu */
             .auth-section {
-                display: flex;
                 flex-direction: column;
-                gap: 20px; /* More space */
+                gap: 10px;
                 width: 100%;
                 padding-top: 1.5rem;
             }
 
             .auth-section .btn {
-                width: 80%;
-                margin: 5px auto;
-                padding: 12px;
-                font-size: 1.1rem;
-            }
-
-            /* Show menu toggle */
-            .menu-toggle {
-                display: flex;
+                width: 100%; /* Make buttons take full width */
+                padding: 10px; /* Adjust padding for better fit */
+                font-size: 1rem; /* Slightly larger font for readability */
+                box-sizing: border-box; /* Ensure padding is included in width */
             }
 
             /* Hamburger Animation */

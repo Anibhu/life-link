@@ -265,7 +265,7 @@ router.post('/donor_registration', isAuthenticated, async (req, res) => {
         const query = "INSERT INTO donors (name, age, bloodgroup, location, contact) VALUES ($1, $2, $3, $4, $5)";
         await pool.query(query, [name, age, bloodgroup, location, contact]);
 
-        res.redirect('/profile');
+        res.redirect('/');
     } catch (err) {
         console.error(err);
         res.status(500).send("Error registering donor");
