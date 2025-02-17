@@ -4,7 +4,7 @@
     <h1>Donor List</h1>
     <%- include ('../partials/search') %>
     
-<% if (blood_donors.length > 0) %>
+<% if (blood_donors.length > 0) {%>
     <table>
 
         <thead>
@@ -30,8 +30,10 @@
             </tr>
         <% }) %>
     </tbody>
-
     </table>
+    <% } else{ %>
+        <h2>No Blood Donors Found</h2>
+        <% } %>
     
 </div>
 

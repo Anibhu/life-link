@@ -8,7 +8,7 @@
            Successful!
         </h1>
         <p class="success-message">
-            Thank you for registering as a donor. Your details have been successfully saved. Hospitals will receive the information you've provided, and connected hospitals will automatically flag your available organs for donation to those in need.
+            Thank you for registering as a donor. Your details have been successfully saved. Hospitals will be able to see your information, and those in need will be notified when a matching donor is available.
         </p>
 
         <div class="donor-details">
@@ -20,7 +20,7 @@
         </div>
 
         <div class="organ-donated">
-            <h3>Organs Donated:</h3>
+            <h3>Organs Volunteered to Donate:</h3>
             <ul>
                 <% if (organs && organs.length > 0) { %>
                     <% organs.split(", ").forEach(function(organ) { %>
