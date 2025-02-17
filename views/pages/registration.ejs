@@ -16,20 +16,20 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #e3f2fd; /* Light Blue */
+            background-color: #F9FAFB;
         }
         .form-container {
-            background: rgba(0, 123, 255, 0.2);
+            background: rgba(30, 58, 138, 0.15);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
             width: 100%;
             max-width: 400px;
         }
         h2 {
             text-align: center;
             margin-bottom: 20px;
-            color: #007bff; /* Blue */
+            color: #1E3A8A;
         }
         .input-group {
             display: flex;
@@ -37,46 +37,63 @@
             gap: 10px;
             margin-bottom: 10px;
         }
-        .input-group input, .input-group select, .input-group textarea {
+        .input-group input, 
+        .input-group select, 
+        .input-group textarea {
             flex: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            padding: 12px;
+            border: 1px solid #6B7280;
+            border-radius: 8px;
             font-size: 16px;
+            background: #ffffff;
+            color: #111827;
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            border-color: #1E40AF;
+            outline: none;
+            box-shadow: 0 0 8px rgba(30, 64, 175, 0.3);
         }
         .full-width {
             width: 100%;
         }
         .submit-btn {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: none;
-            border-radius: 5px;
-            background-color: #007bff;
+            border-radius: 8px;
+            background-color: #1E40AF;
             color: white;
             cursor: pointer;
             font-size: 16px;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
         }
         .submit-btn:hover {
-            background-color: #0056b3;
+            background-color: #1E3A8A;
+            transform: scale(1.05);
         }
         .login-link {
             text-align: center;
             margin-top: 10px;
         }
         .login-link a {
-            color: #007bff;
+            color: #1E40AF;
             text-decoration: none;
+            font-weight: 500;
         }
         .login-link a:hover {
             text-decoration: underline;
         }
         .error-message {
-            color: red;
+            color: #DC2626;
             text-align: center;
             margin-bottom: 10px;
         }
     </style>
+    
 </head>
 <body>
     <div class="form-container">

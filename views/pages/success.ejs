@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error</title>
+    <title>Success</title>
     <link rel="stylesheet" href="/styles.css">
+    <script>
+        setTimeout(function() {
+            window.location.href = "<%= redirectUrl %>";
+        }, 2000); // Wait for 2 seconds before redirecting
+    </script>
 </head>
 <body>
     <div class="container">
-        <div class="error-box">
-            <h1>Error</h1>
-            <p><%= error %></p>
-            <a href="/" class="btn">Go to Home</a>
+        <div class="success-box">
+            <h1>Success!</h1>
+            <p><%= message %></p>
+            <a href="<%= redirectUrl %>" class="btn">Redirecting...</a>
         </div>
-        
     </div>
 </body>
 </html>
@@ -44,17 +48,17 @@ body {
     transform: scale(1.02);
 }
 
-.error-box {
+.success-box {
     padding: 1.5rem;
 }
 
-.error-box h1 {
+.success-box h1 {
     font-size: 2rem;
-    color: #d9534f;
+    color: #28a745; /* Green for success */
     margin-bottom: 1rem;
 }
 
-.error-box p {
+.success-box p {
     font-size: 1.1rem;
     color: #555;
 }
@@ -74,5 +78,4 @@ body {
 .btn:hover {
     background: #0056b3;
 }
-
 </style>

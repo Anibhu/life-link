@@ -1,5 +1,10 @@
-<title>Hospitals</title>
-<%-include ('../partials/header')  %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospitals</title>
+    <%-include ('../partials/header')  %>
     <style>
         h2 {
             text-align: center;
@@ -8,7 +13,7 @@
         }
 
         table {
-            width: 80%;
+            width: 100%;
             margin: 0 auto;
             border-collapse: collapse;
             background: #ffffff;
@@ -55,6 +60,45 @@
 
         button:hover {
             background: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                width: 100%;
+                display: block;
+                overflow-x: auto;
+            }
+
+            th, td {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            button {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 20px;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            th, td {
+                padding: 6px;
+                font-size: 12px;
+            }
+
+            button {
+                padding: 4px 8px;
+                font-size: 10px;
+            }
         }
     </style>
     <script>
@@ -123,5 +167,4 @@
             <% }); %>
         </tbody>
     </table>
-</body>
-</html>
+    <%-include ('../partials/footer')  %>

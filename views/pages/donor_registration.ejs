@@ -4,13 +4,13 @@
 <div class="donor-form">
     <h1 class="page-heading">Donor Registration</h1>
 
-    <form action="/donor_registration" method="POST">
+    <form action="/donor_registration" method="POST" onsubmit="return validateOrganSelection()">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
-
+    
         <label for="age">Age:</label>
         <input type="number" id="age" name="age" required>
-
+    
         <label for="bloodgroup">Blood Group:</label>
         <select id="bloodgroup" name="bloodgroup" required>
             <option value="">Select Blood Group</option>
@@ -23,83 +23,195 @@
             <option value="AB+">AB+</option>
             <option value="AB-">AB-</option>
         </select>
-
+    
         <label for="location">Location:</label>
         <input type="text" id="location" name="location" required>
-
+    
         <label for="contact">Contact Number:</label>
         <input type="tel" id="contact" name="contact" required>
-
+    
+        <label>Organs Available for Donation:</label>
+        <div id="organ-options">
+            <input type="checkbox" id="kidney" name="organ[]" value="Kidney"> <label for="kidney">Kidney</label><br>
+            <input type="checkbox" id="liver" name="organ[]" value="Liver"> <label for="liver">Liver</label><br>
+            <input type="checkbox" id="lungs" name="organ[]" value="Lungs"> <label for="lungs">Lungs</label><br>
+            <input type="checkbox" id="heart" name="organ[]" value="Heart"> <label for="heart">Heart</label><br>
+            <input type="checkbox" id="pancreas" name="organ[]" value="Pancreas"> <label for="pancreas">Pancreas</label><br>
+            <input type="checkbox" id="intestine" name="organ[]" value="Intestine"> <label for="intestine">Intestine</label><br>
+            <input type="checkbox" id="cornea" name="organ[]" value="Cornea"> <label for="cornea">Cornea</label><br>
+            <input type="checkbox" id="skin" name="organ[]" value="Skin"> <label for="skin">Skin</label><br>
+            <input type="checkbox" id="bone_marrow" name="organ[]" value="Bone Marrow"> <label for="bone_marrow">Bone Marrow</label><br>
+            <input type="checkbox" id="blood" name="organ[]" value="Blood" onchange="toggleOrganSelection(this)"> <label for="blood">Blood</label>
+        </div>
+    
         <button type="submit">Register</button>
     </form>
 </div>
 
+<script>
+    function toggleOrganSelection(bloodCheckbox) {
+        let checkboxes = document.querySelectorAll('#organ-options input[type="checkbox"]');
+        if (bloodCheckbox.checked) {
+            checkboxes.forEach(box => {
+                if (box !== bloodCheckbox) {
+                    box.checked = false;
+                    box.disabled = true;
+                }
+            });
+        } else {
+            checkboxes.forEach(box => {
+                box.disabled = false;
+            });
+        }
+    }
+
+    function validateOrganSelection() {
+        const checkboxes = document.querySelectorAll('#organ-options input[type="checkbox"]');
+        let isChecked = false;
+
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked && checkbox.value !== "Blood") {
+                isChecked = true;
+            }
+        });
+
+        if (!isChecked && !document.getElementById('blood').checked) {
+            alert("Please select at least one organ for donation or select 'Blood' if you're donating blood.");
+            return false;
+        }
+
+        return true;
+    }
+</script>
 
 <style>
-    /* Container Styling */
+/* Donor Registration Form Styling */
 .donor-form {
     max-width: 600px;
     margin: 4rem auto;
     padding: 2rem;
-    background: rgba(255, 255, 255, 0.95); /* Light background for better visibility */
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(4px);
-    color: #1E293B; /* Dark text for readability */
+    color: #1E293B;
 }
 
-/* Page Heading */
 .donor-form .page-heading {
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 1.5rem;
-    color: #1E3A8A; /* Deep blue for clear visibility */
+    color: #1E3A8A;
 }
 
-/* Form */
 .donor-form form {
     display: flex;
     flex-direction: column;
 }
 
-/* Labels */
 .donor-form label {
     font-weight: 600;
     margin: 0.5rem 0;
-    color: #111827; /* Very dark for strong contrast */
+    color: #111827;
 }
 
-/* Inputs & Select */
 .donor-form input,
 .donor-form select {
     width: 100%;
     padding: 12px;
     margin-top: 5px;
-    border: 1px solid #6B7280; /* Darker gray for visibility */
+    border: 1px solid #6B7280;
     border-radius: 8px;
     font-size: 1rem;
-    color: #111827; /* Dark text for easy reading */
-    background: #ffffff; /* Pure white for contrast */
+    color: #111827;
+    background: #ffffff;
     transition: border 0.3s, box-shadow 0.3s;
 }
 
-/* Placeholder Styling */
 .donor-form input::placeholder {
-    color: #4B5563; /* Darker gray for better visibility */
+    color: #4B5563;
 }
 
-/* Input Focus Effects */
 .donor-form input:focus,
 .donor-form select:focus {
-    border-color: #1E40AF; /* Highlight */
+    border-color: #1E40AF;
     outline: none;
     box-shadow: 0 0 8px rgba(30, 64, 175, 0.3);
 }
 
-/* Button */
-.donor-form button {
-    background-color: #1E40AF; /* Deep blue button */
+/* Organ Selection Section */
+.organ-selection {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #F3F4F6;
+    border-radius: 8px;
+    border: 1px solid #D1D5DB;
+}
+
+.organ-selection legend {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #1E3A8A;
+    margin-bottom: 10px;
+}
+
+.organ-selection .organ-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.organ-selection label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    color: #374151;
+}
+
+.organ-selection input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.organ-selection input[type="checkbox"]:checked {
+    background-color: #1E40AF;
+    border-color: #1E40AF;
+}
+
+.organ-selection input[type="checkbox"]:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(30, 64, 175, 0.3);
+}
+
+/* Organ Options Styling */
+#organ-options {
+    margin-top: 10px;
+}
+
+#organ-options input[type="checkbox"] {
+    margin-right: 8px;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+}
+
+#organ-options label {
+    font-size: 1rem;
+    color: #111827;
+}
+
+#organ-options input[type="checkbox"]:checked {
+    background-color: #1E40AF;
+    border-color: #1E40AF;
+}
+
+/* Button Styles */
+button {
+    background-color: #1E40AF;
     color: white;
     padding: 12px;
     border: none;
@@ -111,9 +223,29 @@
     margin-top: 1rem;
 }
 
-/* Button Hover Effect */
-.donor-form button:hover {
-    background-color: #1E3A8A; /* Darker blue */
+button:hover {
+    background-color: #1E3A8A;
+    transform: scale(1.05);
+}
+
+/* Keep Logout Button Aligned */
+.logout-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background-color: #DC2626;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.logout-button:hover {
+    background-color: #B91C1C;
     transform: scale(1.05);
 }
 

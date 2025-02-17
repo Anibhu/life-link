@@ -1,0 +1,137 @@
+<%- include('../partials/header') %>    
+<title>Registration Success</title>
+
+<body>
+    <div class="success-container">
+        <h1 class="page-heading">
+            <span class="checkmark">&#10003;</span> 
+           Successful!
+        </h1>
+        <p class="success-message">
+            Thank you for registering as a donor. Your details have been successfully saved. Hospitals will receive the information you've provided, and connected hospitals will automatically flag your available organs for donation to those in need.
+        </p>
+
+        <div class="donor-details">
+            <h2>Donor Details:</h2>
+            <p><strong>Name:</strong> <%= name %></p>
+            <p><strong>Age:</strong> <%= age %></p>
+            <p><strong>Location:</strong> <%= location %></p>
+            <p><strong>Contact:</strong> <%= contact %></p>
+        </div>
+
+        <div class="organ-donated">
+            <h3>Organs Donated:</h3>
+            <ul>
+                <% if (organs && organs.length > 0) { %>
+                    <% organs.split(", ").forEach(function(organ) { %>
+                        <li><%= organ %></li>
+                    <% }); %>
+                <% } else { %>
+                    <li>No organs selected.</li>
+                <% } %>
+            </ul>
+        </div>
+
+        <a href="/" class="back-button">Go back to homepage</a>
+    </div>
+</body>
+
+<style>
+    .success-container {
+        max-width: 600px;
+        margin: 4rem auto;
+        padding: 3rem;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(6px);
+        color: #1E293B;
+        text-align: center;
+        border: 1px solid #E5E7EB;
+    }
+
+    .page-heading {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #10B981; /* Green for success */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .checkmark {
+        font-size: 2.5rem;
+        color: #10B981;
+    }
+
+    .success-message {
+        font-size: 1.2rem;
+        color: #374151; /* Standard gray text */
+        margin-bottom: 2rem;
+        line-height: 1.6;
+    }
+
+    .donor-details,
+    .organ-donated {
+        margin-bottom: 2rem;
+    }
+
+    .donor-details h2,
+    .organ-donated h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #1E3A8A;
+        margin-bottom: 0.75rem;
+    }
+
+    .donor-details p,
+    .organ-donated ul {
+        font-size: 1.1rem;
+        color: #374151;
+        line-height: 1.6;
+    }
+
+    .donor-details strong,
+    .organ-donated strong {
+        font-weight: 600;
+        color: #1E40AF;
+    }
+
+    .back-button {
+        display: inline-block;
+        padding: 12px 20px;
+        margin-top: 2rem;
+        background-color: #1E40AF;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        text-align: center;
+        transition: background 0.3s, transform 0.2s;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    .back-button:hover {
+        background-color: #1E3A8A;
+        transform: scale(1.05);
+    }
+
+    .organ-donated ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .organ-donated li {
+        font-size: 1rem;
+        color: #374151;
+    }
+</style>
+
+<%- include('../partials/footer') %>

@@ -37,81 +37,106 @@
 
 <style>
     body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: #F9FAFB;
-    color: #1F2937;
-}
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color: #F9FAFB;
+        color: #1F2937;
+    }
 
-.blood {
-    width: 90%;
-    max-width: 1200px;
-    margin: 40px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.blood h1 {
-    color: #1E3A8A;
-    margin-bottom: 20px;
-    font-size: 2rem;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-th, td {
-    padding: 12px 15px;
-    text-align: left;
-}
-
-th {
-    background: #1E3A8A;
-    color: white;
-    font-weight: bold;
-}
-
-tbody tr:nth-child(even) {
-    background: #F1F5F9;
-}
-
-tbody tr:hover {
-    background: #E0E7FF;
-    cursor: pointer;
-}
-
-td {
-    color: #333;
-}
-
-/* Responsive */
-@media screen and (max-width: 768px) {
     .blood {
-        width: 95%;
-        padding: 15px;
+        width: 90%;
+        max-width: 1200px;
+        margin: 40px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .blood h1 {
+        color: #1E3A8A;
+        margin-bottom: 20px;
+        font-size: 2rem;
     }
 
     table {
-        font-size: 14px;
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     th, td {
-        padding: 10px;
+        padding: 12px 15px;
+        text-align: left;
     }
-}
 
+    th {
+        background: #1E3A8A;
+        color: white;
+        font-weight: bold;
+    }
+
+    tbody tr:nth-child(even) {
+        background: #F1F5F9;
+    }
+
+    tbody tr:hover {
+        background: #E0E7FF;
+        cursor: pointer;
+    }
+
+    td {
+        color: #333;
+    }
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+        .blood {
+            width: 95%;
+            padding: 15px;
+        }
+
+        .blood h1 {
+            font-size: 1.5rem;
+        }
+
+        table {
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        th, td {
+            padding: 10px;
+            font-size: 14px;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .blood {
+            margin: 20px auto;
+            padding: 10px;
+        }
+
+        .blood h1 {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+        }
+
+        table {
+            font-size: 12px;
+        }
+
+        th, td {
+            padding: 8px;
+        }
+    }
 </style>
-
 <%- include ('../partials/footer') -%>

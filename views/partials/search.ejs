@@ -1,4 +1,58 @@
 <form action="/blood/search" method="GET" class="search-form">
     <input type="text" name="query" class="search-input" placeholder="Search..." required>
-    <button type="submit" class="search-button">🔍</button>
+    <button type="submit" class="search-button">Search</button>
 </form>
+
+<style>
+    .search-form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin: 2rem auto;
+        max-width: 500px;
+        background: white;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+    
+    .search-input {
+        flex: 1;
+        padding: 12px;
+        border: 1px solid #6B7280;
+        border-radius: 8px;
+        font-size: 1rem;
+        color: #111827;
+        background: #ffffff;
+        transition: border 0.3s, box-shadow 0.3s;
+    }
+    
+    .search-input::placeholder {
+        color: #4B5563;
+    }
+    
+    .search-input:focus {
+        border-color: #1E40AF;
+        outline: none;
+        box-shadow: 0 0 8px rgba(30, 64, 175, 0.3);
+    }
+
+    .search-button {
+        background-color: #1E40AF;
+        color: white;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+    }
+    
+    .search-button:hover {
+        background-color: #1E3A8A;
+        transform: scale(1.05);
+    }
+    </style>
+    

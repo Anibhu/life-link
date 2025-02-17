@@ -15,9 +15,9 @@ function getCompatibleBloodGroups(bloodgroup) {
         "O+": ["O+", "O-"],
         "O-": ["O-"]
     };
-
-    return compatibilityMap[bloodgroup] || null; // Return `null` if an invalid blood group is passed
+    return compatibilityMap[bloodgroup] || null;
 }
+
 router.get('/', (req, res) => {
     res.render('index.ejs', { 
         isLoggedIn: req.session.isLoggedIn || false, 
@@ -29,7 +29,6 @@ router.get('/', (req, res) => {
 router.get('/registration', (req, res) => {
     res.render('pages/registration', { error: req.query.error || '' });
 });
-
 
 router.post('/registration', async (req, res) => {
     const { name, age, contact, address, email, password, confirmPassword, bloodgroup, gender } = req.body;
@@ -51,12 +50,9 @@ router.post('/registration', async (req, res) => {
 
         res.redirect('/login');
     } catch (error) {
-        console.error("Registration Error:", error);
         res.render('pages/registration', { error: 'Server error, please try again later' });
     }
 });
-
-
 
 router.get("/login", (req, res) => {
     res.render("pages/login", { 
@@ -85,24 +81,21 @@ router.post('/login', async (req, res) => {
         req.session.email = email;
         req.session.username = user.name;
 
-        // Ensure users are redirected to /hospitals after login
         const redirectTo = req.session.redirectTo || '/';
         delete req.session.redirectTo;
 
         res.redirect(redirectTo);
     } catch (err) {
-        console.error(err.message);
-        res.status(500).send("Server Error");
+        res.status(500).render("pages/error", { error: "Internal server error. Please try again later." });
     }
 });
-router.post("/request", isAuthenticated, async (req, res) => {
-    console.log("Received request body:", req.body);
 
+router.post("/request", isAuthenticated, async (req, res) => {
     try {
         const { name, organ, contact_number, email, location, bloodgroup } = req.body;
 
         if (!name || !organ || !contact_number || !email || !location || !bloodgroup) {
-            return res.status(400).json({ message: "Missing required fields" });
+            return res.status(500).render("pages/error", { error: "Missing required fields" });
         }
 
         const query = `INSERT INTO organ_recipient (name, organ_part, contact_number, email, location, bloodgroup) 
@@ -115,7 +108,7 @@ router.post("/request", isAuthenticated, async (req, res) => {
             const compatibleBloodGroups = getCompatibleBloodGroups(bloodgroup);
 
             if (!compatibleBloodGroups) {
-                return res.status(400).json({ message: "Invalid blood group provided" });
+                return res.status(500).render("pages/error", { error: "Invalid blood group provided" });
             }
 
             const queryParams = new URLSearchParams({
@@ -126,15 +119,12 @@ router.post("/request", isAuthenticated, async (req, res) => {
             return res.redirect(`/blood/search?query=${queryParams.toString()}`);
         } 
         
-        // Redirect to hospitals if organ is NOT blood
         return res.redirect("/hospitals");
 
     } catch (error) {
-        console.error("Error inserting data:", error);
-        res.status(500).render("pages/error", { errorMessage: "Internal server error" });
+        res.status(500).render("pages/error", { error: "Internal server error" });
     }
 });
-
 
 router.get('/profile', isAuthenticated, async (req, res) => {
     try {
@@ -149,15 +139,13 @@ router.get('/profile', isAuthenticated, async (req, res) => {
 
         res.render('pages/profile', { user, recipient });
     } catch (err) {
-        console.error(err);
-        res.status(500).send('Error fetching user data');
+        res.status(500).render("pages/error", { error: "Error fetching user data" });
     }
 });
 
 router.post('/logout', (req, res) => {
     req.session.destroy(err => {
         if (err) {
-            console.error("Logout error:", err);
             return res.redirect('/profile');
         }
         res.redirect('/');
@@ -172,10 +160,8 @@ router.get('/blood/all', async (req, res) => {
             return res.redirect('/login'); 
         }
         res.render('pages/blood_donor_list.ejs', { blood_donors : data.rows });
-
     } catch (error) {
-        console.log(error);
-        res.status(500).send("Server Error");
+        res.status(500).render("pages/error", { errorMessage: "Internal server error. Please try again later." });
     }
 });
 
@@ -196,11 +182,14 @@ router.get('/blood/search', isAuthenticated, async (req, res) => {
                 const match = term.match(/^([a-zA-Z0-9_]+)=(.+)$/);
                 if (match) {
                     const key = match[1].toLowerCase();
-                    let value = decodeURIComponent(match[2]); // Decode URL-encoded values
+                    let value = decodeURIComponent(match[2]);
 
+                    // Handling specific fields
                     if (key === "bloodgroups") {
-                        // Properly split blood groups on comma
                         fieldSearch[key] = value.split(",").map(bg => bg.trim());
+                    } else if (key === "pid") {
+                        // If pid is in the query, directly add it to the conditions
+                        fieldSearch[key] = value.trim();
                     } else {
                         fieldSearch[key] = [value];
                     }
@@ -209,21 +198,24 @@ router.get('/blood/search', isAuthenticated, async (req, res) => {
                 }
             });
 
-            // Filter by location
+            // Add condition for "pid"
+            if (fieldSearch.pid) {
+                conditions.push(`"pid" = $${values.length + 1}`);
+                values.push(fieldSearch.pid);
+            }
+
             if (fieldSearch.location) {
                 const locationConditions = fieldSearch.location.map((loc, index) => `"location" ILIKE $${values.length + index + 1}`);
                 conditions.push(`(${locationConditions.join(isAndSearch ? ' AND ' : ' OR ')})`);
                 values.push(...fieldSearch.location.map(loc => `%${sanitizeQuery(loc)}%`));
             }
 
-            // Fixing blood group filtering
             if (fieldSearch.bloodgroups && fieldSearch.bloodgroups.length > 0) {
                 const bloodConditions = fieldSearch.bloodgroups.map((bg, index) => `$${values.length + index + 1}`);
                 conditions.push(`"bloodgroup" IN (${bloodConditions.join(", ")})`);
                 values.push(...fieldSearch.bloodgroups);
             }
 
-            // General search
             if (generalSearch.length > 0) {
                 const generalConditions = generalSearch.map((term, index) => {
                     const placeholder = `$${values.length + index + 1}`;
@@ -238,16 +230,14 @@ router.get('/blood/search', isAuthenticated, async (req, res) => {
             sql += ` ORDER BY pid LIMIT 50`;
         }
 
-        console.log("Final SQL Query:", sql, "Values:", values); // Debugging
-
         const { rows } = await pool.query(sql, values);
         res.render('pages/blood_donor_list', { blood_donors: rows });
 
     } catch (error) {
-        console.error("Error fetching donors:", error);
         res.status(500).render('pages/error', { error: "Error fetching blood donors" });
     }
 });
+
 
 router.get('/organs', isAuthenticated, (req, res) => {
     res.render("pages/organ");
@@ -258,27 +248,47 @@ router.get('/donor_registration', isAuthenticated, (req, res) => {
 });
 
 router.post('/donor_registration', isAuthenticated, async (req, res) => {
-    const { name, age, bloodgroup, location, contact } = req.body;
+    const { name, age, bloodgroup, location, contact, organ } = req.body;
 
     try {
-        const query = "INSERT INTO donors (name, age, bloodgroup, location, contact) VALUES ($1, $2, $3, $4, $5)";
-        await pool.query(query, [name, age, bloodgroup, location, contact]);
+        if (organ && organ.includes("Blood")) {
+            const query = "INSERT INTO donors (name, age, bloodgroup, location, contact) VALUES ($1, $2, $3, $4, $5) RETURNING pid";
+            const result = await pool.query(query, [name, age, bloodgroup, location, contact]);
+            const pid = result.rows[0].pid;
+            res.render('pages/success', { 
+                message: "Your donation has been successfully registered.",
+                redirectUrl: `/blood/search?query=pid=${pid}`
+            });
+        }
+        
 
-        res.redirect('/');
+        const organs = organ;
+        const insertQuery = `
+            INSERT INTO organ_donor (name, age, bloodgroup, location, contact, organs)
+            VALUES ($1, $2, $3, $4, $5, $6)
+        `;
+        await pool.query(insertQuery, [name, age, bloodgroup, location, contact, organs]);
+
+        res.render("pages/registration_success", {
+            name,
+            age,
+            location,
+            contact,
+            organs: organs.join(", ")  // Displaying organs as a comma-separated list for readability
+        });
     } catch (err) {
-        console.error(err);
-        res.status(500).send("Error registering donor");
+        res.status(500).render("pages/error", { error: "Error registering donor" });
     }
 });
+
+
 
 router.get("/hospitals", isAuthenticated, async (req, res) => {
     try {
         const result = await pool.query("SELECT * FROM hospitals");
-        console.log("Fetched hospitals:", result.rows); // Debugging Log
         res.render("pages/hospitals", { hospitals: result.rows });
     } catch (error) {
-        console.error("Error fetching hospitals:", error);
-        res.status(500).send("Internal Server Error");
+        res.status(500).render("pages/error", { error: "Internal server error. Please try again later." });
     }
 });
 
@@ -291,7 +301,6 @@ router.post("/hospitals/request", isAuthenticated, async (req, res) => {
             return res.status(400).json({ success: false, error: "Missing serial_no or hospital_email" });
         }
 
-        // Fetch user details from organ_recipient table
         const userResult = await pool.query("SELECT * FROM organ_recipient WHERE email = $1", [userEmail]);
 
         if (userResult.rows.length === 0) {
@@ -300,21 +309,12 @@ router.post("/hospitals/request", isAuthenticated, async (req, res) => {
 
         const userData = userResult.rows[0];
 
-        // Instead of sending an email, just log the details
-        console.log(`Organ request received:
-        Hospital Email: ${hospital_email}
-        Recipient Name: ${userData.name}
-        Recipient Email: ${userData.email}
-        Blood Group: ${userData.blood_group}`);
-
         res.json({ success: true });
 
     } catch (error) {
-        console.error("Error requesting hospital:", error);
         res.status(500).json({ success: false, error: "Internal server error" });
     }
 });
-
 
 router.get('/health_check', (req, res) => {
     res.status(200).send("<h2>Service is running smoothly ✅</h2>");

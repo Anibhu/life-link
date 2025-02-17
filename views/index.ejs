@@ -1,82 +1,138 @@
-<%- include('partials/header')  %>
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Save Lives, Donate Today</h1>
-            <div class="banner">
-                <h2>Give the Gift of Life - Donate Blood & Organs</h2>
-            </div>
-            <div class="cta-buttons">
-                <button class="btn-register-btn" onclick="window.location.href='/donor_registration'">Register as a Donor</button>
-                <button class="btn-request-btn" onclick="window.location.href='/organs'">Looking for a Donor</button>
+<%- include('partials/header') %>
+
+<!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="hero-content">
+        <h1>Save Lives, Donate Today</h1>
+        <div class="banner">
+            <h2>Your Decision to Donate Can Save Thousands</h2>
+        </div>
+        <div class="cta-buttons">
+            <button class="btn-register-btn" onclick="window.location.href='/donor_registration'">Register as a Donor</button>
+            <button class="btn-request-btn" onclick="window.location.href='/organs'">Looking for a Donor</button>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="about">
+    <h2>Why Donate?</h2>
+    <div class="about-content">
+        <img src="/images/donation-statistics.jpg" alt="Donation Statistics">
+        <p>
+            Every year, <strong>thousands of lives are lost</strong> due to the unavailability of organs and blood at the right time. Did you know?
+            <ul>
+                <li>Over <strong>100,000 people</strong> are on the waiting list for organ transplants in the U.S. alone.</li>
+                <li>Every <strong>9 minutes</strong>, someone is added to the transplant waiting list.</li>
+                <li>One organ donor can save up to <strong>8 lives</strong>.</li>
+                <li>One blood donor can save up to <strong>3 lives</strong>.</li>
+            </ul>
+            By registering as a donor, you can give someone a second chance at life. It’s not just a medical act; it’s a moral responsibility.
+        </p>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section id="how-it-works" class="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps">
+        <div class="step">
+            <img src="/images/step1-register.jpg" alt="Register as a Donor">
+            <h3>Step 1: Register as a Donor</h3>
+            <p>Sign up on LifeLink and provide your details. Your information will be securely stored and shared with hospitals in our network when needed.</p>
+        </div>
+        <div class="step">
+            <img src="/images/step2-consent.jpg" alt="Consent for Donation">
+            <h3>Step 2: Consent for Donation</h3>
+            <p>In the event of your passing, hospitals in our database will be notified. They will update your donor status and ensure your organs or blood are used to save lives.</p>
+        </div>
+        <div class="step">
+            <img src="images/step3-save-lives.jpg" alt="Save Lives">
+            <h3>Step 3: Save Lives</h3>
+            <p>Your donation will be matched with recipients in need, giving them a second chance at life.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Us Section -->
+<section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <p>If you have any questions or need more information, please don't hesitate to reach out to us.</p>
+    <form id="contactForm" class="contact-form">
+        <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Submit</button>
+    </form>
+    <div id="form-response"></div>
+</section>
+
+<!-- FAQ Section -->
+<section id="faq" class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-box">
+        <div class="faq-item">
+            <button class="faq-question">
+                What is organ donation?
+                <span class="arrow">↓</span>
+            </button>
+            <div class="faq-answer">
+                Organ donation involves giving an organ or tissue to someone in need of a transplant. It can save lives by providing vital organs like the heart, liver, kidneys, etc.
             </div>
         </div>
-    </section>
-
-    <section id="about" class="about">
-        <h2>About Us</h2>
-        <div class="about-content">
-            <img src="images/Blood-Donation-2.jpg" alt="Blood Donation">
-            <p>
-                LifeLink is a platform dedicated to connecting patients in need of organ transplants and blood donations with compatible donors. Our mission is to bridge the gap between donors and recipients by providing a seamless and efficient system for registration, searching, and matching. Users can create accounts, register as donors, and request organ transplants while hospitals can update real-time availability. With an easy-to-use dashboard, patients can track their requests, view donor details, and stay informed about their health needs. LifeLink ensures secure authentication, user-friendly navigation, and a reliable database, making the process of saving lives more accessible and efficient.
-            </p>
-        </div>
-    </section>
-
-    <section id="contact" class="contact">
-        <div class="contact-content">
-            <h2>Contact Us</h2>
-            <p>Have questions or want to get involved? We'd love to hear from you!</p>
-            <div class="contact-form">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message:</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit">Send Message</button>
-                </form>
-                <div id="form-response"></div>
+        <div class="faq-item">
+            <button class="faq-question">
+                How do I become a donor?
+                <span class="arrow">↓</span>
+            </button>
+            <div class="faq-answer">
+                You can register as a donor by signing up on our platform and filling out the required details. You can choose which organs you wish to donate.
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <script>
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navLinks = document.querySelector('.nav-links');
-
-        mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+<script>
+    // FAQ functionality (Collapsible)
+    document.querySelectorAll('.faq-question').forEach(button => {
+        button.addEventListener('click', () => {
+            const allAnswers = document.querySelectorAll('.faq-answer');
+            const answer = button.nextElementSibling;
+            const arrow = button.querySelector('.arrow');
+            
+            // Close all answers
+            allAnswers.forEach(ans => {
+                if (ans !== answer) {
+                    ans.style.display = 'none';
+                    ans.previousElementSibling.querySelector('.arrow').textContent = '↓'; // Reset other arrows to down
+                }
             });
-        });
 
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const formResponse = document.getElementById('form-response');
-            formResponse.innerHTML = "Thank you for your message. We will get back to you soon!";
-            const formData = new FormData(event.target);
-            // AJAX call to submit form data
+            // Toggle the clicked answer
+            const isVisible = answer.style.display === 'block';
+            answer.style.display = isVisible ? 'none' : 'block';
+            arrow.textContent = isVisible ? '↓' : '↑'; // Rotate arrow on click
         });
-    </script>
-</body>
-</html>
+    });
+
+    // Contact Form Submit
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formResponse = document.getElementById('form-response');
+        formResponse.innerHTML = "Thank you for your message. We will get back to you soon!";
+    });
+</script>
 
 <style>
-
 /* General Styles */
 body {
     font-family: 'Roboto', sans-serif;
@@ -87,41 +143,16 @@ body {
     color: #1F2937;
 }
 
-/* Hero, About, and Contact Sections */
-.hero, .about, .contact {
-    text-align: center;
+/* Hero Section */
+#home {
+    background: linear-gradient(to right, #1E3A8A, #2563EB);
+    color: white;
     padding: 5rem 2rem;
-}
-
-.hero {
-    background: linear-gradient(to right, #1E3A8A, #2563EB);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.hero h1, .about h2, .contact h2 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
-
-.about, .contact {
-    background: linear-gradient(to right, #1E3A8A, #2563EB);
-    color: white;
-}
-
-.about img {
-    width: 50%;
-    max-width: 400px;
-    border-radius: 10px;
-    margin-top: 1rem;
+    text-align: center;
 }
 
 /* Buttons */
-.btn-register-btn, .btn-request-btn {
+.btn-register-btn, .btn-request-btn, .btn-submit {
     padding: 1rem 2rem;
     border: none;
     border-radius: 8px;
@@ -137,68 +168,20 @@ body {
     background-color: #10B981;
 }
 
-.btn-request-btn {
-    background-color: #F59E0B;
-}
-
-.btn-register-btn:hover, .btn-request-btn:hover {
+.btn-register-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Contact Section */
-.contact-content {
-    max-width: 600px;
-    margin: 0 auto;
+.btn-request-btn {
+    background-color: #F59E0B;
 }
 
-.contact p, .about p {
-    font-size: 1.1rem;
-    color: #E0E7FF;
-    margin-bottom: 2rem;
-    line-height: 1.6;
+.btn-request-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Contact Form */
-.contact-form {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    margin: 2rem auto;
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-    text-align: left;
-}
-
-.form-group label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: #1E3A8A;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #D1D5DB;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    border-color: #2563EB;
-    outline: none;
-    box-shadow: 0 0 8px rgba(37, 99, 235, 0.3);
-}
-
-/* Submit Button */
 .btn-submit {
     background-color: #2563EB;
     color: white;
@@ -217,12 +200,198 @@ body {
     transform: translateY(-2px);
 }
 
-/* Form Response */
-#form-response {
-    margin-top: 1rem;
-    font-weight: 600;
-    color: #16A34A;
+/* About Section */
+.about {
+    text-align: center;
+    padding: 5rem 2rem;
+    background: #ffffff;
+    color: #1F2937;
 }
+
+.about img {
+    max-width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+.why-donate ul {
+    list-style-type: none; /* Removes the bullets */
+    padding-left: 0; /* Removes padding */
+}
+
+.why-donate li {
+    margin-bottom: 1rem; /* Adds some space between list items */
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* How It Works Section */
+.how-it-works {
+    padding: 5rem 2rem;
+    background: #F1F5F9;
+    color: #1F2937;
+}
+
+.how-it-works .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    justify-items: center;
+}
+
+.how-it-works .step {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.how-it-works .step img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.how-it-works h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+/* Contact Us Section */
+.contact {
+    padding: 5rem 2rem;
+    background: #ffffff;
+    color: #1F2937;
+    text-align: center;
+}
+
+.contact p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: 1rem 0;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.contact-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.contact-form label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 5px;
+    border: 1px solid #D1D5DB;
+    font-size: 1rem;
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+.contact .contact-form .btn-submit {
+    width: 50%;
+    margin: 1rem auto; /* This will center the button */
+    display: block; /* Ensures it takes up the full width specified */
+}
+
+.contact-form .thank-you {
+    color: #10B981; /* Green for "Thank you" */
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+/* FAQ Section */
+.faq {
+    padding: 5rem 2rem;
+    background: #F9FAFB;
+    color: #1F2937;
+    text-align: center;
+}
+
+.faq-box {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;  /* Centered the FAQ box */
+    color: #334155;
+    border: 1px solid #D1D5DB;
+}
+
+.faq-item {
+    margin: 1.5rem 0;
+}
+
+.faq-question {
+    background-color: #4B5563;
+    color: white;
+    padding: 1rem;
+    font-size: 1.2rem;
+    text-align: left;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.faq-question:hover {
+    background-color: #2563EB;
+}
+
+.faq-answer {
+    display: none;
+    padding: 1rem;
+    background-color: #E5E7EB;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+}
+
+.arrow {
+    float: right;
+    font-size: 1.2rem;
+}
+
+/* Media Queries (Responsiveness) */
+@media (max-width: 768px) {
+    .how-it-works .steps {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-form {
+        padding: 0 1rem;
+    }
+
+    .faq-box {
+        padding: 1.5rem;
+    }
+
+    .faq-question {
+        font-size: 1rem;
+    }
+
+    .contact p {
+        font-size: 1rem;
+    }
+}
+
 </style>
 
 <%- include('partials/footer') %>
