@@ -1,7 +1,6 @@
 import express from 'express';
 import pool from './database.js';
 import { isAuthenticated, sanitizeQuery } from './utils.js';
-import nodemailer from "nodemailer";
 
 const router = express.Router();
 
